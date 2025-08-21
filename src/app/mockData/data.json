@@ -1,0 +1,47 @@
+{
+  "covers":[
+  {
+    "id": 1,
+    "title": "Beautiful and Brutal Yard",
+    "artist": "J Hus",
+    "type": "album",
+    "image": "/covers/babyJhus.jpg",
+    "price": 38
+  },
+  {
+    "id": 2,
+    "title": "Dimensions",
+    "artist": "JAE5",
+    "type": "album",
+    "image": "/covers/Dimensions.jpg",
+    "price": 35
+  },
+  {
+    "id": 3,
+    "title": "FYN",
+    "artist": "Rema",
+    "type": "single",
+    "image": "/covers/FYN.png",
+    "price": 20
+  },
+  {
+    "id": 4,
+    "title": "I Told Them",
+    "artist": "Burna Boy",
+    "type": "album",
+    "image": "/covers/I_Told_Them.jpg",
+    "price": 42
+  },
+  {
+    "id": 5,
+    "title": "Lungu Boy",
+    "artist": "Asake",
+    "type": "single",
+    "image": "/covers/LunguBoy.jpg",
+    "price": 22
+  }
+  
+]
+
+  
+}
