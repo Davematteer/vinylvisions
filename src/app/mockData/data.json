@@ -1,47 +1,101 @@
 {
-  "covers":[
-  {
-    "id": 1,
-    "title": "Beautiful and Brutal Yard",
-    "artist": "J Hus",
-    "type": "album",
-    "image": "/covers/babyJhus.jpg",
-    "price": 38
-  },
-  {
-    "id": 2,
-    "title": "Dimensions",
-    "artist": "JAE5",
-    "type": "album",
-    "image": "/covers/Dimensions.jpg",
-    "price": 35
-  },
-  {
-    "id": 3,
-    "title": "FYN",
-    "artist": "Rema",
-    "type": "single",
-    "image": "/covers/FYN.png",
-    "price": 20
-  },
-  {
-    "id": 4,
-    "title": "I Told Them",
-    "artist": "Burna Boy",
-    "type": "album",
-    "image": "/covers/I_Told_Them.jpg",
-    "price": 42
-  },
-  {
-    "id": 5,
-    "title": "Lungu Boy",
-    "artist": "Asake",
-    "type": "single",
-    "image": "/covers/LunguBoy.jpg",
-    "price": 22
-  }
-  
-]
-
-  
+  "covers": [
+    {
+      "id": 1,
+      "title": "Beautiful and Brutal Yard",
+      "artist": "J Hus",
+      "type": "album",
+      "image": "/covers/babyJhus.jpg",
+      "price": 38,
+      "songs": [
+        "Massacre",
+        "Who Told You",
+        "Militant",
+        "Fresh Out",
+        "Darling",
+        "Palm Trees",
+        "Party Tonight",
+        "Bumpy Ride",
+        "Tough Love",
+        "No Denying"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Dimensions",
+      "artist": "JAE5",
+      "type": "album",
+      "image": "/covers/Dimensions.jpg",
+      "price": 35,
+      "songs": [
+        "Dimension",
+        "Sunshine",
+        "Blessings",
+        "Fallin’",
+        "Moonlight",
+        "Energy",
+        "No Stress",
+        "Lonely Nights",
+        "Vibe Machine"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "FYN",
+      "artist": "Rema",
+      "type": "single",
+      "image": "/covers/FYN.png",
+      "price": 20,
+      "songs": [
+        "FYN",
+        "Calm Down",
+        "Vibe Out",
+        "Runaway",
+        "Addicted",
+        "Peace of Mind",
+        "Charm",
+        "Soundgasm",
+        "Bounce"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "I Told Them",
+      "artist": "Burna Boy",
+      "type": "album",
+      "image": "/covers/I_Told_Them.jpg",
+      "price": 42,
+      "songs": [
+        "I Told Them",
+        "Sittin’ On Top",
+        "Big 7",
+        "Cheat Code",
+        "City Boys",
+        "Giza",
+        "Thanks",
+        "On Form",
+        "12 Jewels",
+        "Different Size"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Lungu Boy",
+      "artist": "Asake",
+      "type": "single",
+      "image": "/covers/LunguBoy.jpg",
+      "price": 22,
+      "songs": [
+        "Lungu Boy",
+        "Sungba",
+        "Joha",
+        "Terminator",
+        "Lonely at the Top",
+        "Organise",
+        "Peace Be Unto You",
+        "Mogbe",
+        "Amapiano"
+      ]
+    }
+  ]
 }

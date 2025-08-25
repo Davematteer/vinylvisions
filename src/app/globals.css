@@ -122,7 +122,7 @@
 }
 
 main, nav {
-  @apply max-w-6xl mx-auto my-12; 
+  @apply max-w-6xl mx-auto my-2; 
 }
 p{
   @apply mt-2
@@ -131,5 +131,10 @@ h1 {
   @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
 }
 h2 {
-  @apply scroll
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight 
+  transition-colors first:mt-0;
+}
+
+body {
+  @apply flex flex-col min-h-screen bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] justify-center items-center;
 }

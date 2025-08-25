@@ -1,28 +1,40 @@
+
+import { CTA } from "@/components/CTA"
+import { Footer } from "@/components/footer"
+import { Hero } from "@/components/hero"
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 
-import Image from "next/image"
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
-interface Cover {
+import Image from "next/image"
+import Link from "next/link" // ✅ import Link
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { CardsforHomepage } from "@/components/cardsForHomepage"
+
+
+export interface Cover {
   id: number,
   title: string,
   artist: string,
   type: string,
   image: string,
   price: number
+  songs: string[]
 }
-
 const getCovers = async () => {
   try {
     const res = await fetch("http://localhost:5000/covers");
-    console.log(res.body)
     return res.json();
   } catch (error) {
     console.error(error);
@@ -31,35 +43,19 @@ const getCovers = async () => {
 
 export default async function Home() {
   const covers = await getCovers();
-
+ 
+  
   return (
-    <div>
-      <h1>Yo</h1>
-      <div className="grid grid-cols-3 gap-8">
-        {covers.map((cover: Cover) => (
-          <Card key={cover.id}>
-            <CardHeader>
-              <div>
-                <CardTitle>{cover.title}</CardTitle>
-                <CardDescription>{cover.type}</CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src={cover.image}
-                alt="album cover"
-                width={300}
-                height={300}
-              />
-            </CardContent>
-            <CardFooter>
-              <button>Click me</button>
-              <p>{cover.price}</p>
-            </CardFooter>
-          </Card>
-        )
-        )}
+    <main className="min-h-screen p-2">
+      <Hero />
+      <div className="w-full mx-auto">
+        <div className="text-center mb-8">
+          <p className="text-gray-600 text-base">Curated Album Art & Music Posters</p>
+        </div>
+          <CardsforHomepage covers={covers}/>        
       </div>
-    </div>
+      
+        <CTA />
+    </main>
   )
 }
