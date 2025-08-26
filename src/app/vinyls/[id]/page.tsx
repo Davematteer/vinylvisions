@@ -52,9 +52,9 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
 
                 {/* Album info */}
                 <div className="mb-6">
-                  <h3 className="text-xl lg:text-2xl font-extrabold text-black uppercase tracking-wide">
+                <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
                     {vinyl!.title}
-                  </h3>
+                  </p>
                   <p className="text-base lg:text-lg font-medium text-gray-700">{vinyl!.artist}</p>
                 </div>
 
@@ -75,8 +75,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           </CardContent>
         </Card>
             </CarouselItem>
-            <CarouselItem>
-              <LyricsCard artist={vinyl.artist} song={vinyl.title} />
+            <CarouselItem className="translate-y-25">
+              <LyricsCard artist={vinyl.artist} song={vinyl.title} image={vinyl.image}/>
             </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />

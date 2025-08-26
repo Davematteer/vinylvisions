@@ -61,7 +61,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
               </Card>
             </CarouselItem>
             <CarouselItem className="translate-y-25">
-              <LyricsCard artist={vinyl.artist} song={vinyl.title} />
+              <LyricsCard artist={vinyl.artist} song={vinyl.title} image={vinyl.image} />
             </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />

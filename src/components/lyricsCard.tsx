@@ -8,13 +8,15 @@ PaginationItem,
 PaginationLink,
 } from "@/components/ui/pagination";
 import { AspectRatio } from "./ui/aspect-ratio";
+import Image from "next/image";
 
 interface LyricsCardProps {
   song: string;
   artist: string;
+  image: string;
 }
 
-export function LyricsCard({ song, artist }: LyricsCardProps) {
+export function LyricsCard({ song, artist, image }: LyricsCardProps) {
   const [lyrics, setLyrics] = useState<string | null>(null);
   const [parts, setParts] = useState<string[]>([]);
   const [selectedPart, setSelectedPart] = useState<number>(0);
@@ -50,45 +52,45 @@ export function LyricsCard({ song, artist }: LyricsCardProps) {
 
   return (
     <AspectRatio className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee]">
-      <div className=" p-4 rounded-3xl shadow-2xl w-full max-w-sm h-[600px] mx-auto">
-        <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] border-0 overflow-hidden shadow-2xl w-full h-full  transition-all duration-300 hover:shadow-3xl hover:scale-105">
+      <div className="p-4 rounded-3xl shadow-2xl w-full max-w-sm h-[600px] mx-auto">
+        <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] border-0 overflow-hidden shadow-2xl w-full h-full transition-all duration-300 hover:shadow-3xl hover:scale-105">
           <CardContent className="p-4 text-left h-full flex flex-col justify-between relative">
-            {/* Album Art Style Icon */}
-            {/* <div className="absolute top-3 left-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-lg shadow-lg flex items-center justify-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-blue-400 to-purple-600 rounded-md"></div>
-              </div>
-            </div> */}
-
-            <div className="mt-12">
-              <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
-        
-                {song}
-              </p>
-              <p className=" mb-4 text-base trackign-tight font-mono font-medium">
-                {artist}
-              </p>
-              
-              <div className="whitespace-pre-wrap text-xl tracking-tight text-left font-light font-sans text-black leading-snug">
-                {parts.length > 0 ? parts[selectedPart] : "Loading lyrics..."}
+            {/* Header with Album Art and Song Info */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-4">
+                <div className="w-14 h-14 rounded-lg shadow-lg flex items-center justify-center overflow-hidden">
+                  {image && (
+                    <Image
+                      src={image}
+                      alt="cover_img"
+                      width={56}
+                      height={56}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  )}
+                </div>
+                
+                <div className="flex-1">
+                  <p className="text-xl lg:text-2xl tracking-tight font-light font-sans text-black uppercase leading-tight">
+                    {song}
+                  </p>
+                  <p className="text-base tracking-tight font-mono font-medium text-gray-700 mt-1">
+                    {artist}
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Spotify Logo Style */}
-            {/* <div className="absolute bottom-3 left-3">
-              <div className="flex items-center space-x-1.5">
-                <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-black rounded-full"></div>
-                  </div>
-                </div>
-                <span className="text-black font-bold text-xs tracking-wide">Music</span>
+            {/* Lyrics Content */}
+            <div className="flex-1 flex items-center justify-center py-4">
+              <div className="whitespace-pre-wrap text-xl tracking-tight text-left font-light font-sans text-black leading-relaxed">
+                {parts.length > 0 ? parts[selectedPart] : "Loading lyrics..."}
               </div>
-            </div> */}
+            </div>
           </CardContent>
           
           {parts.length > 1 && (
-            <CardFooter className="p-3 border-t-0 -translate-y-12 overflow-hidden">
+            <CardFooter className="p-3 border-t-0 -translate-y-8 overflow-hidden">
               <div className="w-full overflow-x-auto scrollbar-hide">
                 <Pagination className="w-max min-w-full">
                   <PaginationContent className="justify-start flex-nowrap">
