@@ -28,6 +28,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { LyricsCard } from "./lyricsCard";
 
 
 export const Hero = () => (
@@ -53,7 +54,7 @@ export const Hero = () => (
             </Button>
           </div>
         </div>
-        <div className="rounded-md aspect-square flex md:-translate-x-0 -translate-x-15">
+        <div className="rounded-md aspect-square flex justify-center items-center md:-translate-x-0 -translate-x-10">
           <Carousel className="flex justify-center items-center p-20"
           plugins={[
             Autoplay({
@@ -88,6 +89,9 @@ export const Hero = () => (
                   height={300}
                   className="transition-transform duration-500 hover:-translate-y-2 hover:shadow-xlrounded-2xl p-6 shadow-md transition-transform duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl"
                   />
+              </CarouselItem>
+              <CarouselItem>
+                <LyricsCard artist="Rema" song="FYN"/>
               </CarouselItem>
             </CarouselContent>
             <CarouselPrevious />

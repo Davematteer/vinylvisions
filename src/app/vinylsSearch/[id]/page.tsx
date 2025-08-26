@@ -1,59 +1,73 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { LyricsCard } from "@/components/lyricsCard";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
-    const { id } = await params;
-  
-  
+  const { id } = await params;
   const res = await fetch(`http://localhost:3000/api/search/specific?id=${id}`, {
     cache: "no-store", // ensures always fresh
   });
   const vinyl = await res.json();
-
+  
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* LEFT: Album Preview */}
-        <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-          <CardContent className="p-10 lg:p-14">
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-1.5 shadow-xl">
-              <div className="bg-white p-6">
-                <div className="relative mb-6 flex justify-center">
-                  <Image
-                    src={vinyl.image}
-                    alt={vinyl.title}
-                    width={400}
-                    height={400}
-                    className="w-full max-w-[400px] aspect-square object-cover shadow-lg"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <h3 className="text-2xl font-extrabold text-black uppercase tracking-wide">
-                    {vinyl.title}
-                  </h3>
-                  <p className="text-lg font-medium text-gray-700">
-                    {vinyl.artist}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-sm">
-                  {vinyl.songs.slice(0, 10).map((track: string, index: number) => (
-                    <div key={index} className="flex items-start">
-                      <span className="text-black font-semibold mr-2">
-                        {index + 1}.
-                      </span>
-                      <span className="text-black">{track}</span>
+        {/* LEFT: Album Preview with Carousel */}
+        <Carousel className="w-full max-w-lg">
+          <CarouselContent>
+            <CarouselItem>
+              <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
+                <CardContent className="p-8 lg:p-10">
+                  <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
+                    <div className="bg-white p-6">
+                      <div className="relative mb-6 flex justify-center">
+                        <Image
+                          src={vinyl.image}
+                          alt={vinyl.title}
+                          width={400}
+                          height={400}
+                          className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
+                        />
+                      </div>
+                      <div className="mb-6">
+                        <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
+                          {vinyl.title}
+                        </p>
+                        <p className="text-base lg:text-lg font-medium text-gray-700">
+                          {vinyl.artist}
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
+                        {vinyl.songs.slice(0, 10).map((track: string, index: number) => (
+                          <div key={index} className="flex items-start">
+                            <span className="text-black font-semibold mr-2">
+                              {index + 1}.
+                            </span>
+                            <span className="text-black">{track}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
                     </div>
-                  ))}
-                </div>
-
-                <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
+                  </div>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+            <CarouselItem className="translate-y-25">
+              <LyricsCard artist={vinyl.artist} song={vinyl.title} />
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+        
         {/* RIGHT: Payment / Details */}
         <div className="flex flex-col justify-start gap-6 p-10">
           <p className="text-6xl font-light">{vinyl.title}</p>
@@ -61,7 +75,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <p className="text-2xl font-light text-gray-900">
             GHc{vinyl.price.toFixed(2)}
           </p>
-
+          
           {/* Size */}
           <div>
             <label className="block text-sm font-medium mb-1">Size</label>
@@ -71,7 +85,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
               <option>A2 - Print Only (Unframed)</option>
             </select>
           </div>
-
+          
           {/* Quantity */}
           <div>
             <label className="block text-sm font-medium mb-1">Quantity</label>
@@ -85,7 +99,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
               <button className="px-3 py-1 border-l">+</button>
             </div>
           </div>
-
+          
           <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
             Add to Cart
           </button>

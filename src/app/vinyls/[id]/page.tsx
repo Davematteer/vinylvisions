@@ -1,6 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { LyricsCard } from "@/components/lyricsCard";
+
+
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
@@ -20,11 +30,13 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* LEFT: Album Preview */}
-      
-        <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-          <CardContent className="p-10 lg:p-14">
+        <Carousel className="w-full max-w-lg">
+          <CarouselContent className="flex justify-between">
+            <CarouselItem>
+            <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
+          <CardContent className="p-8 lg:p-10">
             {/* Frame */}
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-1.5 shadow-xl">
+            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
               {/* Mat board */}
               <div className="bg-white p-6">
                 {/* Album cover */}
@@ -34,20 +46,20 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                     alt={vinyl!.title}
                     width={400}
                     height={400}
-                    className="w-full max-w-[400px] aspect-square object-cover shadow-lg"
+                    className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
                   />
                 </div>
 
                 {/* Album info */}
                 <div className="mb-6">
-                  <h3 className="text-2xl font-extrabold text-black uppercase tracking-wide">
+                  <h3 className="text-xl lg:text-2xl font-extrabold text-black uppercase tracking-wide">
                     {vinyl!.title}
                   </h3>
-                  <p className="text-lg font-medium text-gray-700">{vinyl!.artist}</p>
+                  <p className="text-base lg:text-lg font-medium text-gray-700">{vinyl!.artist}</p>
                 </div>
 
                 {/* Track listing */}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-sm">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
                   {vinyl!.songs.slice(0, 10).map((track:string[], index:number) => (
                     <div key={index} className="flex items-start">
                       <span className="text-black font-semibold mr-2">{index + 1}.</span>
@@ -62,7 +74,16 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
             </div>
           </CardContent>
         </Card>
-
+            </CarouselItem>
+            <CarouselItem>
+              <LyricsCard artist={vinyl.artist} song={vinyl.title} />
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      
+                
         {/* RIGHT: Payment / Details */}
         <div className="flex flex-col justify-start gap-6 p-10">
           <p className="text-6xl font-light">{vinyl!.title}</p>
