@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { LyricsCard } from "@/components/lyricsCard";
+import PayButton, { redirect } from "@/lib/payment-hook";
 
 
 
@@ -115,9 +116,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
             Add to Cart
           </button>
-          <button className="bg-black text-white py-3 rounded-lg hover:bg-gray-800">
-            Buy Now
-          </button>
+          <PayButton email="davematteer@gmail.com" amount={vinyl.price *100} />
         </div>
       </section>
     </main>

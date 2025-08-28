@@ -91,7 +91,7 @@ export const Hero = () => (
                   />
               </CarouselItem>
               <CarouselItem>
-                <LyricsCard artist="Rema" song="FYN"/>
+                <LyricsCard artist="Rema" song="FYN" image="/covers/FYN.png"/>
               </CarouselItem>
             </CarouselContent>
             <CarouselPrevious />

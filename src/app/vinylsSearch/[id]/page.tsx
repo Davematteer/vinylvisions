@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { LyricsCard } from "@/components/lyricsCard";
+import PayButton from "@/lib/payment-hook";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
@@ -60,7 +61,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                 </CardContent>
               </Card>
             </CarouselItem>
-            <CarouselItem className="translate-y-25">
+            <CarouselItem className="md:translate-y-20 translate-y-8">
               <LyricsCard artist={vinyl.artist} song={vinyl.title} image={vinyl.image} />
             </CarouselItem>
           </CarouselContent>
@@ -103,9 +104,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
             Add to Cart
           </button>
-          <button className="bg-black text-white py-3 rounded-lg hover:bg-gray-800">
-            Buy Now
-          </button>
+          <PayButton email="davematteer@gmail.com" amount={100 *100} />
         </div>
       </section>
     </main>

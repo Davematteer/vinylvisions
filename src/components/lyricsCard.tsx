@@ -52,7 +52,7 @@ export function LyricsCard({ song, artist, image }: LyricsCardProps) {
 
   return (
     <AspectRatio className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee]">
-      <div className="p-4 rounded-3xl shadow-2xl w-full max-w-sm h-[600px] mx-auto">
+      <div className="p-4 rounded-3xl w-full max-w-sm h-[600px] mx-auto">
         <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] border-0 overflow-hidden shadow-2xl w-full h-full transition-all duration-300 hover:shadow-3xl hover:scale-105">
           <CardContent className="p-4 text-left h-full flex flex-col justify-between relative">
             {/* Header with Album Art and Song Info */}
