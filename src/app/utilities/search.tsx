@@ -60,7 +60,7 @@ export function OpenSearch({
   console.log(results)
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-white rounded-2xl shadow-lg md:-translate-y-30 -translate-y-130 ">
+      <DialogContent className="sm:max-w-lg bg-white rounded-2xl shadow-lg md:-translate-y-30 -translate-y-100 ">
         <DialogHeader>
           <DialogTitle className="text-lg flex "><span className="font-light">Search</span></DialogTitle>
         </DialogHeader>

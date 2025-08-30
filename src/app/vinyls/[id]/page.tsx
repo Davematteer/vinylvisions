@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/carousel"
 import { LyricsCard } from "@/components/lyricsCard";
 import PayButton, { redirect } from "@/lib/payment-hook";
+import { DownloadCardButton } from "@/lib/downloadImage";
+import { UserSession } from "@/lib/authMethods";
 
 
 
@@ -35,11 +37,11 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <CarouselContent className="flex justify-between">
             <CarouselItem>
             <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-          <CardContent className="p-8 lg:p-10">
+          <CardContent className="p-8 lg:p-10 " id={vinyl.title}>
             {/* Frame */}
             <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
               {/* Mat board */}
-              <div className="bg-white p-6">
+              <div className="bg-white p-6" >
                 {/* Album cover */}
                 <div className="relative mb-6 flex justify-center">
                   <Image
@@ -116,7 +118,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
             Add to Cart
           </button>
-          <PayButton email="davematteer@gmail.com" amount={vinyl.price *100} />
+          <PayButton amount={vinyl.price *100} />
+          <DownloadCardButton targetId={vinyl.title} />
         </div>
       </section>
     </main>

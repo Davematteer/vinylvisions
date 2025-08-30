@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel"
 import { LyricsCard } from "@/components/lyricsCard";
 import PayButton from "@/lib/payment-hook";
+import { DownloadCardButton } from "@/lib/downloadImage";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
@@ -23,13 +24,14 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
         {/* LEFT: Album Preview with Carousel */}
         <Carousel className="w-full max-w-lg">
           <CarouselContent>
-            <CarouselItem>
+            <CarouselItem >
               <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-                <CardContent className="p-8 lg:p-10">
-                  <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
+                <CardContent className="p-8 lg:p-10" >
+                  <div id="my-node" className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
                     <div className="bg-white p-6">
-                      <div className="relative mb-6 flex justify-center">
+                      <div className="relative mb-6 flex justify-center" >
                         <Image
+                        
                           src={vinyl.image}
                           alt={vinyl.title}
                           width={400}
@@ -105,6 +107,9 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
             Add to Cart
           </button>
           <PayButton email="davematteer@gmail.com" amount={100 *100} />
+          
+          {/* Just for testing the card download */}
+          <DownloadCardButton targetId="my-node" />
         </div>
       </section>
     </main>

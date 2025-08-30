@@ -1,5 +1,7 @@
 "use client"
 
+import { UserSession } from "./authMethods"
+
 type PaymentResponse = {
   status: boolean
   message: string
@@ -35,12 +37,12 @@ export async function redirect({ email, amount }: { email: string; amount: numbe
 }
 
 export default function PayButton({
-  email,
   amount,
 }: {
-  email: string
   amount: number
 }) {
+  const userSession = UserSession()
+  const email = userSession?.user.email!
   return (
     <button
       className="bg-black text-white py-3 rounded-lg hover:bg-gray-800"

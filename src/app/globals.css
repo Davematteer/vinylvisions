@@ -135,6 +135,6 @@ h2 {
   transition-colors first:mt-0;
 }
 
-body {
-  @apply flex flex-col min-h-screen bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] justify-center items-center;
+html, body {
+  @apply min-h-screen bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-x-hidden ;
 }

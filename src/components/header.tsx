@@ -9,11 +9,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-
+import Image from "next/image";
 import { Menu, MoveRight, X, User, Search } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { OpenSearch } from "@/app/utilities/search";
+import {toast} from "sonner"
+import { useRouter } from "next/navigation";
 import {
   Sheet,
   SheetClose,
@@ -24,9 +26,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { SignOut, UserSession } from "@/lib/authMethods";
 
 
 export const Header = () => {
+  const userSession = UserSession();
+  const router = useRouter();
   const navigationItems = [
     {
       title: "Home",
@@ -55,6 +60,7 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="min-h-14 flex items-center justify-between">
           {/* Desktop Nav */}
+          
           <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
             <NavigationMenu className="flex justify-start items-start">
               <NavigationMenuList className="flex justify-start gap-4 flex-row">
@@ -96,6 +102,9 @@ export const Header = () => {
             </NavigationMenu>
           </div>
 
+
+     
+
           {/* Right-side actions */}
           <div className="hidden lg:flex items-center gap-4">
             <Button variant="ghost" onClick={() => setSearchOpen(true)}>
@@ -112,7 +121,8 @@ export const Header = () => {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
+          <SheetTitle>
+            {userSession? ` Welcome ${userSession?.user.name}!` : "Account Info"}</SheetTitle>
           <SheetDescription>
             Make changes to your profile here. Click save when you&apos;re done.
           </SheetDescription>
@@ -127,8 +137,34 @@ export const Header = () => {
             <Input id="sheet-demo-username" defaultValue="@peduarte" /> */}
           </div>
         </div>
-        <SheetFooter>
-          <Button type="submit">Save changes</Button>
+        <SheetFooter> 
+          { !userSession ? (        
+          <>
+            <SheetClose asChild>
+              <Link href="/login">
+              <Button className="w-full">
+              Login
+              </Button>
+              </Link>
+           </SheetClose>
+           <SheetClose asChild>
+              <Link href="/signup">
+              <Button className="w-full">
+              Sign Up
+              </Button>
+              </Link>
+           </SheetClose>
+          </>
+          ) : ( <SheetClose asChild>
+              <Link href="/" onClick={() => SignOut(router)}>
+              <Button className="w-full" onClick={()=>{toast(`${userSession.user.name} signed out!`)}}>
+              Logout
+              </Button>
+              </Link>
+
+          </SheetClose>) }         
+         
+         
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
@@ -138,16 +174,30 @@ export const Header = () => {
           </div>
 
           {/* Mobile right-side actions */}
-          <div className="flex lg:hidden items-center gap-3">
+          <div className="grid grid-cols-3 lg:hidden items-center gap-8">
             
-            <Button variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
+            <Button className="flex justify-start" variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
+
+              <Link 
+              href="/"
+              className="flex justify-center">
+            <Image
+            src="/logo.png"
+            alt="app logo"
+            width={50}
+            height={50}
+            />
+              </Link>
+
+            <div className="flex justify-end">
             <Button variant="ghost" onClick={() => setSearchOpen(true)}>
             <Search /> 
             Search
             </Button>
-          
+
+         {/* Sheet for mobile*/} 
             <Sheet>
               <SheetTrigger>
                 <User className="w-5 h-5" />
@@ -160,8 +210,23 @@ export const Header = () => {
                     and remove your data from our servers.
                   </SheetDescription>
                 </SheetHeader>
+        <SheetFooter>
+          
+          <SheetClose asChild>
+              <Link href="/login">
+              <Button className="w-full">
+              Login
+              </Button>
+              </Link>
+
+          </SheetClose>
+          <SheetClose asChild>
+            <Button variant="outline">Close</Button>
+          </SheetClose>
+        </SheetFooter>
               </SheetContent>
             </Sheet>
+            </div>
           </div>
         </div>
 
@@ -205,7 +270,7 @@ export const Header = () => {
       </div>
     </header>
     
-    
+
       <OpenSearch open={isOpenSearch} onOpenChange={setSearchOpen} />
     
     </>
