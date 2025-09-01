@@ -1,4 +1,4 @@
-import { MoveRight, PhoneCall } from "lucide-react";
+import { LogInIcon, MoveRight, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -26,7 +26,7 @@ export const CTA = () => (
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-md sm:max-w-none px-2">
           <Link href="login">
            <Button className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px] gap-2 sm:gap-4 bg-black text-white hover:bg-gray-800 py-3">
-            Login and Start browsing! <PhoneCall className="w-4 h-4" />
+            Login to browse! <LogInIcon className="w-4 h-4" />
           </Button>
           </Link>
          
