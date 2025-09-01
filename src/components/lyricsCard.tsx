@@ -28,6 +28,13 @@ export function LyricsCard({ song, artist, image }: LyricsCardProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ song, artist }),
       });
+      
+      if (!res.ok) {
+        const text = await res.text();
+        console.error('API error:', text);
+        throw new Error('Failed to fetch lyrics');
+      }
+      
       const data = await res.json();
       setLyrics(data.lyrics);
     }
