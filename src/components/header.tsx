@@ -175,10 +175,10 @@ export const Header = () => {
 
           {/* Mobile right-side actions */}
           <div className="grid grid-cols-2 lg:hidden items-center gap-8">
-            
+{/*             
             <Button className="flex justify-start" variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
+            </Button> */}
 
               <Link 
               href="/"
