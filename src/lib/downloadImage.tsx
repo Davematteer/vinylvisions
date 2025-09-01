@@ -70,7 +70,7 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
         } else {
           const link = document.createElement("a");
           link.href = dataUrl;
-          link.download = `${targetId}.png`;
+          //link.download = `${targetId}.png`;
           link.click();
         }
       })
