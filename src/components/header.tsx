@@ -174,7 +174,7 @@ export const Header = () => {
           </div>
 
           {/* Mobile right-side actions */}
-          <div className="grid grid-cols-3 lg:hidden items-center gap-8">
+          <div className="grid grid-cols-2 lg:hidden items-center gap-8">
             
             <Button className="flex justify-start" variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -249,7 +249,7 @@ export const Header = () => {
         </div>
 
         {/* Mobile Nav Dropdown */}
-        {isOpen && (
+        {/* {isOpen && (
           <div className="lg:hidden border-t bg-background shadow-lg py-4 gap-6 flex flex-col">
             {navigationItems.map((item) => (
               <div key={item.title}>
@@ -284,7 +284,7 @@ export const Header = () => {
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </header>
     
