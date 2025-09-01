@@ -13,11 +13,11 @@ import { DownloadCardButton } from "@/lib/downloadImage";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
-  const res = await fetch(`http://localhost:3000/api/search/specific?id=${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/search/specific?id=${id}`, {
     cache: "no-store", // ensures always fresh
   });
   const vinyl = await res.json();
-  
+  vinyl.price = 100;
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -107,7 +107,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
             Add to Cart
           </button>
           
-          <PayButton amount={vinyl.price *100} />
+          <PayButton amount={vinyl.price * 100} />
           {/* Just for testing the card download */}
           <DownloadCardButton targetId="my-node" />
         </div>

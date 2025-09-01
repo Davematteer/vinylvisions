@@ -47,7 +47,7 @@ export function CardsforHomepage({ covers }: { covers: Cover[] }) {
                       <div className="relative mb-3 flex justify-center">
                         <div className="relative  p-2 rounded-none">
                           <Image
-                            src={(cover.image as any).asset.url}
+                            src={(cover.image)}
                             alt={cover.title}
                             width={350}
                             height={350}

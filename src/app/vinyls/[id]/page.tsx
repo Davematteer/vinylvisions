@@ -1,5 +1,5 @@
+// src/app/vinyls/[id]/page.tsx
 import { Card, CardContent } from "@/components/ui/card";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
 import {
   Carousel,
@@ -7,48 +7,37 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
 import { LyricsCard } from "@/components/lyricsCard";
-import PayButton, { redirect } from "@/lib/payment-hook";
+import PayButton from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
-import { UserSession } from "@/lib/authMethods";
-import { type SanityDocument } from "next-sanity";
-import { client } from "@/lib/sanity/client";
-import { Cover } from "@/app/page";
 
- const getCovers = async (id:string) => {
-    try {
-      const COVERS_QUERY = `*[_type == "cover" && _id == '${id}']{"id":_id,
-    title,
-    artist,
-    type,
-    image{asset -> {url}},
-    price,
-    songs}
-  `;
-      
-      const options = { next: { revalidate: 30 } };
-      const covers = await client.fetch<Cover>(COVERS_QUERY, {}, options);
-      return covers;
-    } catch (error) {
-      console.error(error);
-    }
-  }
+export interface Cover {
+  id: number;
+  title: string;
+  artist: string;
+  type: string;
+  image: string;
+  price: number;
+  songs: string[];
+}
 
-export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
-  const { id } = await params;
+// Server-side function to read JSON from public folder
+const getCovers = async (): Promise<Cover[]> => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/data.json`);
+  if (!res.ok) throw new Error("Failed to fetch covers");
+  const data = await res.json();
+  return data.covers;
+};
 
- 
-  // const fetchVinyl = async () => {
-  //   try {
-  //     const res = await fetch(`http://localhost:5000/covers/${id}`);
-  //     return res.json();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+export default async function Vinyl({ params }: { params: { id: string } }) {
+  const { id } = params;
 
-  const vinyl = (await getCovers(`"${id}"`)) as any;
+  // fetch all covers from JSON
+  const covers = await getCovers();
+  const vinyl = covers.find((c) => c.id === parseInt(id));
+
+  if (!vinyl) return <p>Vinyl not found</p>;
 
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
@@ -57,62 +46,64 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
         <Carousel className="w-full max-w-lg">
           <CarouselContent className="flex justify-between">
             <CarouselItem>
-            <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-          <CardContent className="p-8 lg:p-10 " id={vinyl!.title}>
-            {/* Frame */}
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
-              {/* Mat board */}
-              <div className="bg-white p-6" >
-                {/* Album cover */}
-                <div className="relative mb-6 flex justify-center">
-                  <Image
-                    src={vinyl!.image}
-                    alt={vinyl!.title}
-                    width={400}
-                    height={400}
-                    className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
-                  />
-                </div>
+              <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
+                <CardContent className="p-8 lg:p-10" id={vinyl.title}>
+                  <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
+                    <div className="bg-white p-6">
+                      <div className="relative mb-6 flex justify-center">
+                        <Image
+                          src={vinyl.image}
+                          alt={vinyl.title}
+                          width={400}
+                          height={400}
+                          className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
+                        />
+                      </div>
 
-                {/* Album info */}
-                <div className="mb-6">
-                <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
-                    {vinyl!.title}
-                  </p>
-                  <p className="text-base lg:text-lg font-medium text-gray-700">{vinyl!.artist}</p>
-                </div>
+                      <div className="mb-6">
+                        <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
+                          {vinyl.title}
+                        </p>
+                        <p className="text-base lg:text-lg font-medium text-gray-700">
+                          {vinyl.artist}
+                        </p>
+                      </div>
 
-                {/* Track listing */}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
-                  {vinyl?.songs?.slice(0, 10).map((track:string[], index:number) => (
-                    <div key={index} className="flex items-start">
-                      <span className="text-black font-semibold mr-2">{index + 1}.</span>
-                      <span className="text-black">{track}</span>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
+                        {vinyl.songs.slice(0, 10).map((track, index) => (
+                          <div key={index} className="flex items-start">
+                            <span className="text-black font-semibold mr-2">
+                              {index + 1}.
+                            </span>
+                            <span className="text-black">{track}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
                     </div>
-                  ))}
-                </div>
-
-                {/* Color bar */}
-                <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                  </div>
+                </CardContent>
+              </Card>
             </CarouselItem>
-            <CarouselItem className="translate-y-25">
-              <LyricsCard artist={vinyl.artist} song={vinyl.title} image={vinyl.image}/>
+
+            <CarouselItem>
+              <LyricsCard
+                artist={vinyl.artist}
+                song={vinyl.title}
+                image={vinyl.image}
+              />
             </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-      
-                
+
         {/* RIGHT: Payment / Details */}
         <div className="flex flex-col justify-start gap-6 p-10">
-          <p className="text-6xl font-light">{vinyl!.title}</p>
-          <p className="text-xl font-light text-gray-800">{vinyl!.artist}</p>
-          {/* <p className="text-2xl font-light text-gray-900">GHc{vinyl.price.toFixed(2)}</p> */}
+          <p className="text-6xl font-light">{vinyl.title}</p>
+          <p className="text-xl font-light text-gray-800">{vinyl.artist}</p>
+          <p className="text-2xl font-light text-gray-900">GHc{vinyl.price.toFixed(2)}</p>
 
           <div>
             <label className="block text-sm font-medium mb-1">Size</label>
@@ -139,7 +130,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
             Add to Cart
           </button>
-          <PayButton amount={vinyl.price *100} />
+          <PayButton amount={vinyl.price * 100} />
           <DownloadCardButton targetId={vinyl.title} />
         </div>
       </section>

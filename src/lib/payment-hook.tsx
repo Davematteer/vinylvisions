@@ -25,6 +25,11 @@ export async function redirect({ email, amount }: { email: string; amount: numbe
     })
 
     const data: PaymentResponse = await res.json()
+
+  if (!data.status) {
+    console.error("Paystack error:", data.message);
+    return;
+  }
     const { access_code } = data.data
 
     // 👇 load Paystack only on the client
