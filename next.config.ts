@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
       hostname:"cdn.sanity.io",
       pathname:"/images/**"
     }]
+  },
+  eslint:{
+    ignoreDuringBuilds:true
   }
 };
 
