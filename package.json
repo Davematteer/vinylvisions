@@ -7,7 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "server": "json-server --watch ./src/app/mockData/data.json --port 5000"
+    "server": "json-server --watch ./public/data.json --port 5000"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
