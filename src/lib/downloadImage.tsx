@@ -11,10 +11,16 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
 
     try {
       const dataUrl = await htmlToImage.toPng(node,{ pixelRatio:6, fontEmbedCSS: "font-sans"});
-      const link = document.createElement("a");
-      link.href = dataUrl;
-      //link.download = `${targetId}.png`;
-      link.click();
+      
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        window.open(dataUrl, "_blank"); // open in new tab on mobile
+      } else {
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = `${targetId}.png`;
+        link.click();
+      }
+      
     } catch (err) {
       console.error("Failed to capture node:", err);
     }
