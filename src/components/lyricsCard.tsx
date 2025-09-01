@@ -23,7 +23,7 @@ export function LyricsCard({ song, artist, image }: LyricsCardProps) {
 
   useEffect(() => {
     async function fetchLyrics() {
-      const res = await fetch(`/api/search/lyrics`, {
+      const res = await fetch(`https://vinylvisions.vercel.app/api/search/lyrics`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ song, artist }),
