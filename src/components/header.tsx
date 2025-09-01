@@ -174,7 +174,7 @@ export const Header = () => {
           </div>
 
           {/* Mobile right-side actions */}
-          <div className="grid grid-cols-2 lg:hidden items-center gap-15">
+          <div className="grid grid-cols-3 lg:hidden items-center gap-15">
 {/*             
             <Button className="flex justify-start" variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -190,6 +190,10 @@ export const Header = () => {
             height={50}
             />
               </Link>
+
+              <div className="flex justify-center">
+
+              </div>
 
             <div className="flex justify-end">
             <Button variant="ghost" onClick={() => setSearchOpen(true)}>

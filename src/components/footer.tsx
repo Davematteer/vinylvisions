@@ -20,12 +20,8 @@ export const Footer = () => {
           href: "/shop/albums",
         },
         {
-          title: "Posters",
-          href: "/shop/posters",
-        },
-        {
           title: "Limited Editions",
-          href: "/shop/limited",
+          href: "/",
         },
       ],
     },
@@ -36,14 +32,6 @@ export const Footer = () => {
         {
           title: "About Us",
           href: "/about",
-        },
-        {
-          title: "Community",
-          href: "/community",
-        },
-        {
-          title: "Blog",
-          href: "/blog",
         },
         {
           title: "Contact",
