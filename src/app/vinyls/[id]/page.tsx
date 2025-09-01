@@ -12,22 +12,43 @@ import { LyricsCard } from "@/components/lyricsCard";
 import PayButton, { redirect } from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
 import { UserSession } from "@/lib/authMethods";
+import { type SanityDocument } from "next-sanity";
+import { client } from "@/lib/sanity/client";
+import { Cover } from "@/app/page";
 
-
+ const getCovers = async (id:string) => {
+    try {
+      const COVERS_QUERY = `*[_type == "cover" && _id == '${id}']{"id":_id,
+    title,
+    artist,
+    type,
+    image{asset -> {url}},
+    price,
+    songs}
+  `;
+      
+      const options = { next: { revalidate: 30 } };
+      const covers = await client.fetch<Cover>(COVERS_QUERY, {}, options);
+      return covers;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
 
-  const fetchVinyl = async () => {
-    try {
-      const res = await fetch(`http://localhost:5000/covers/${id}`);
-      return res.json();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
+  // const fetchVinyl = async () => {
+  //   try {
+  //     const res = await fetch(`http://localhost:5000/covers/${id}`);
+  //     return res.json();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const vinyl = await fetchVinyl();
+  const vinyl = (await getCovers(`"${id}"`)) as any;
 
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
@@ -37,7 +58,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <CarouselContent className="flex justify-between">
             <CarouselItem>
             <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-          <CardContent className="p-8 lg:p-10 " id={vinyl.title}>
+          <CardContent className="p-8 lg:p-10 " id={vinyl!.title}>
             {/* Frame */}
             <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
               {/* Mat board */}
@@ -63,7 +84,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
 
                 {/* Track listing */}
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
-                  {vinyl!.songs.slice(0, 10).map((track:string[], index:number) => (
+                  {vinyl?.songs?.slice(0, 10).map((track:string[], index:number) => (
                     <div key={index} className="flex items-start">
                       <span className="text-black font-semibold mr-2">{index + 1}.</span>
                       <span className="text-black">{track}</span>
@@ -91,7 +112,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
         <div className="flex flex-col justify-start gap-6 p-10">
           <p className="text-6xl font-light">{vinyl!.title}</p>
           <p className="text-xl font-light text-gray-800">{vinyl!.artist}</p>
-          <p className="text-2xl font-light text-gray-900">GHc{vinyl.price.toFixed(2)}</p>
+          {/* <p className="text-2xl font-light text-gray-900">GHc{vinyl.price.toFixed(2)}</p> */}
 
           <div>
             <label className="block text-sm font-medium mb-1">Size</label>

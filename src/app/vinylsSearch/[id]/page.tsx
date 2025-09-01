@@ -106,8 +106,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
             Add to Cart
           </button>
-          <PayButton email="davematteer@gmail.com" amount={100 *100} />
           
+          <PayButton amount={vinyl.price *100} />
           {/* Just for testing the card download */}
           <DownloadCardButton targetId="my-node" />
         </div>

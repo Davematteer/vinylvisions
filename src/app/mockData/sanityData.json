@@ -1,0 +1,105 @@
+[
+    {
+      "_type": "cover",
+      "_id": "cover-1",
+      "title": "Beautiful and Brutal Yard",
+      "artist": "J Hus",
+      "type": "album",
+      "image": "/covers/babyJhus.jpg",
+      "price": 38,
+      "songs": [
+        { "_type": "song", "title": "Massacre" },
+        { "_type": "song", "title": "Who Told You" },
+        { "_type": "song", "title": "Militant" },
+        { "_type": "song", "title": "Fresh Out" },
+        { "_type": "song", "title": "Darling" },
+        { "_type": "song", "title": "Palm Trees" },
+        { "_type": "song", "title": "Party Tonight" },
+        { "_type": "song", "title": "Bumpy Ride" },
+        { "_type": "song", "title": "Tough Love" },
+        { "_type": "song", "title": "No Denying" }
+      ]
+    },
+    {
+      "_type": "cover",
+      "_id": "cover-2",
+      "title": "Dimensions",
+      "artist": "JAE5",
+      "type": "album",
+      "image": "/covers/Dimensions.jpg",
+      "price": 35,
+      "songs": [
+        { "_type": "song", "title": "Dimension" },
+        { "_type": "song", "title": "Sunshine" },
+        { "_type": "song", "title": "Blessings" },
+        { "_type": "song", "title": "Fallin’" },
+        { "_type": "song", "title": "Moonlight" },
+        { "_type": "song", "title": "Energy" },
+        { "_type": "song", "title": "No Stress" },
+        { "_type": "song", "title": "Lonely Nights" },
+        { "_type": "song", "title": "Vibe Machine" }
+      ]
+    },
+    {
+      "_type": "cover",
+      "_id": "cover-3",
+      "title": "FYN",
+      "artist": "Rema",
+      "type": "single",
+      "image": "/covers/FYN.png",
+      "price": 20,
+      "songs": [
+        { "_type": "song", "title": "FYN" },
+        { "_type": "song", "title": "Calm Down" },
+        { "_type": "song", "title": "Vibe Out" },
+        { "_type": "song", "title": "Runaway" },
+        { "_type": "song", "title": "Addicted" },
+        { "_type": "song", "title": "Peace of Mind" },
+        { "_type": "song", "title": "Charm" },
+        { "_type": "song", "title": "Soundgasm" },
+        { "_type": "song", "title": "Bounce" }
+      ]
+    },
+    {
+      "_type": "cover",
+      "_id": "cover-4",
+      "title": "I Told Them",
+      "artist": "Burna Boy",
+      "type": "album",
+      "image": "/covers/I_Told_Them.jpg",
+      "price": 42,
+      "songs": [
+        { "_type": "song", "title": "I Told Them" },
+        { "_type": "song", "title": "Sittin’ On Top" },
+        { "_type": "song", "title": "Big 7" },
+        { "_type": "song", "title": "Cheat Code" },
+        { "_type": "song", "title": "City Boys" },
+        { "_type": "song", "title": "Giza" },
+        { "_type": "song", "title": "Thanks" },
+        { "_type": "song", "title": "On Form" },
+        { "_type": "song", "title": "12 Jewels" },
+        { "_type": "song", "title": "Different Size" }
+      ]
+    },
+    {
+      "_type": "cover",
+      "_id": "cover-5",
+      "title": "Lungu Boy",
+      "artist": "Asake",
+      "type": "single",
+      "image": "/covers/LunguBoy.jpg",
+      "price": 22,
+      "songs": [
+        { "_type": "song", "title": "Lungu Boy" },
+        { "_type": "song", "title": "Sungba" },
+        { "_type": "song", "title": "Joha" },
+        { "_type": "song", "title": "Terminator" },
+        { "_type": "song", "title": "Lonely at the Top" },
+        { "_type": "song", "title": "Organise" },
+        { "_type": "song", "title": "Peace Be Unto You" },
+        { "_type": "song", "title": "Mogbe" },
+        { "_type": "song", "title": "Amapiano" }
+      ]
+    }
+  ]
+  

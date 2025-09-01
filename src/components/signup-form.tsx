@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { SocialsignIn } from "@/lib/authMethods";
 
 export function SignUpForm({
   className,
@@ -64,7 +65,7 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Sign Up for an account</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
@@ -110,7 +111,7 @@ export function SignUpForm({
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Signing Up..." : "Sign-Up"}
                 </Button>
-                <Button variant="outline" className="w-full" type="button">
+                <Button variant="outline" className="w-full" type="button" onClick={SocialsignIn}>
                   Login with Google
                 </Button>
               </div>

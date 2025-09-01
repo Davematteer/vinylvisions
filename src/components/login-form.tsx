@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { SocialsignIn } from "@/lib/authMethods";
 
 export function LoginForm({
   className,
@@ -99,7 +100,7 @@ export function LoginForm({
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Logging in..." : "Login"}
                 </Button>
-                <Button variant="outline" className="w-full" type="button">
+                <Button variant="outline" className="w-full" type="button" onClick={SocialsignIn}>
                   Login with Google
                 </Button>
               </div>

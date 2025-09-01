@@ -1,6 +1,7 @@
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const CTA = () => (
   <div className="w-full py-10 sm:py-20 lg:py-40 mb-20 text-black px-4 ">
@@ -26,9 +27,11 @@ export const CTA = () => (
           <Button className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px] gap-2 sm:gap-4 bg-black text-white hover:bg-gray-800 py-3">
             Jump on a call <PhoneCall className="w-4 h-4" />
           </Button>
+        <Link href="signup">
           <Button className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px] gap-2 sm:gap-4 bg-gray-200 text-black hover:bg-gray-300 py-3">
             Sign up here <MoveRight className="w-4 h-4" />
           </Button>
+        </Link>
         </div>
       </div>
     </div>

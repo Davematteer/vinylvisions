@@ -13,6 +13,12 @@ export async function SignOut(router:ReturnType<typeof import("next/navigation")
   });
 }
 
+export const SocialsignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
 export function UserSession(){
 
     const { 

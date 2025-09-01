@@ -11,6 +11,7 @@ import {
 } from "./ui/carousel";
 import { Cover } from "@/app/page";
 
+
 export function CardsforHomepage({ covers }: { covers: Cover[] }) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -46,7 +47,7 @@ export function CardsforHomepage({ covers }: { covers: Cover[] }) {
                       <div className="relative mb-3 flex justify-center">
                         <div className="relative  p-2 rounded-none">
                           <Image
-                            src={cover.image}
+                            src={(cover.image as any).asset.url}
                             alt={cover.title}
                             width={350}
                             height={350}

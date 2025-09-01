@@ -21,6 +21,9 @@ import Image from "next/image"
 import Link from "next/link" // ✅ import Link
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { CardsforHomepage } from "@/components/cardsForHomepage"
+import { type SanityDocument } from "next-sanity";
+import { client } from "@/lib/sanity/client"
+
 
 
 export interface Cover {
@@ -34,8 +37,19 @@ export interface Cover {
 }
 const getCovers = async () => {
   try {
-    const res = await fetch("http://localhost:5000/covers");
-    return res.json();
+    const COVERS_QUERY = `*[_type == "cover"]{"id":_id,
+  title,
+  artist,
+  type,
+  image{asset -> {url}},
+  price,
+  songs}
+`;
+    
+    // const res = await fetch("http://localhost:5000/covers");
+    const options = { next: { revalidate: 30 } };
+    const covers = await client.fetch<Cover[]>(COVERS_QUERY, {}, options);
+    return covers;
   } catch (error) {
     console.error(error);
   }
@@ -52,7 +66,7 @@ export default async function Home() {
         <div className="text-center mb-8">
           <p className="text-gray-600 text-base">Curated Album Art & Music Posters</p>
         </div>
-          <CardsforHomepage covers={covers}/>        
+          <CardsforHomepage covers={covers!}/>        
       </div>
       
         <CTA />

@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { UserSession } from "./authMethods"
 
 type PaymentResponse = {
@@ -43,10 +44,14 @@ export default function PayButton({
 }) {
   const userSession = UserSession()
   const email = userSession?.user.email!
+  const router = useRouter()
+
   return (
     <button
       className="bg-black text-white py-3 rounded-lg hover:bg-gray-800"
-      onClick={() => redirect({ email, amount })}
+      onClick={() => {
+        (userSession ? redirect({ email, amount }) : router.push("/login") )
+      }}
     >
       Buy Now
     </button>
