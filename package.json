@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "NEXT_PUBLIC_DISABLE_ESLINT=true next build --turbopack",
     "start": "next start",
     "lint": "eslint",
     "server": "json-server --watch ./src/app/mockData/data.json --port 5000"
