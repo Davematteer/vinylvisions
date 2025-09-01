@@ -8,7 +8,7 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
     if (!node) return;
 
     try {
-      const dataUrl = await htmlToImage.toPng(node, { pixelRatio: 6, fontEmbedCSS: "font-sans" });
+      const dataUrl = await htmlToImage.toPng(node, { pixelRatio: 1, fontEmbedCSS: "font-sans" });
 
       // Detect iOS Safari
       const isIosSafari =
@@ -22,7 +22,7 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
       } else {
         const link = document.createElement("a");
         link.href = dataUrl;
-        //link.download = `${targetId}.png`;
+      link.download = `${targetId}.png`;
         link.click();
       }
 
