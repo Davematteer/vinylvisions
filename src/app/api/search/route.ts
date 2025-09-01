@@ -10,7 +10,7 @@ export async function GET(req: Request) {
 
   try {
     // get token
-    const tokenRes = await fetch(`http://localhost:3000/api/token`);
+    const tokenRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/token`|| `http://localhost:3000/api/token`);
     const tokenData = await tokenRes.json();    
 
     if (!tokenData.access_token) {
