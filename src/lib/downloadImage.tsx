@@ -40,19 +40,25 @@
 //     </button>
 //   );
 // }
-
 "use client";
 
+import React, { useRef, useCallback } from "react";
 import { toPng } from "html-to-image";
 
-export function DownloadCardButton({ targetId }: { targetId: string }) {
-  const handleDownload = async () => {
-    const node = document.getElementById(targetId);
+interface DownloadCardButtonProps {
+  targetId: string;
+}
+
+export const DownloadCardButton: React.FC<DownloadCardButtonProps> = ({ targetId }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleDownload = useCallback(async () => {
+    const node = ref.current || document.getElementById(targetId);
     if (!node) return;
 
     try {
-      // Use toPng with rect method
       const rect = node.getBoundingClientRect();
+
       const dataUrl = await toPng(node, {
         pixelRatio: 6,
         fontEmbedCSS: "font-sans",
@@ -67,7 +73,7 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
         !/Chrome|CriOS|FxiOS|OPiOS|EdgiOS/.test(navigator.userAgent);
 
       if (/Mobi|Android/i.test(navigator.userAgent) || isIosSafari) {
-        // open in new tab on mobile or iOS Safari
+        // Open in new tab on mobile or iOS Safari
         window.open(dataUrl, "_blank");
       } else {
         const link = document.createElement("a");
@@ -78,14 +84,19 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
     } catch (err) {
       console.error("Failed to capture node:", err);
     }
-  };
+  }, [targetId]);
 
   return (
-    <button
-      onClick={handleDownload}
-      className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-    >
-      Download Preview
-    </button>
+    <>
+      <div ref={ref} id={targetId}>
+        {/* DOM nodes you want to convert to PNG */}
+      </div>
+      <button
+        onClick={handleDownload}
+        className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+      >
+        Download Preview
+      </button>
+    </>
   );
-}
+};
