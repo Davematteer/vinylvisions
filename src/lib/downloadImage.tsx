@@ -34,7 +34,7 @@ export const handleDownload = async (targetId: string) => {
         // First try: create a temporary link and click it
         const link = document.createElement("a");
         link.href = blobUrl;
-        //link.download = `${targetId}.png`;
+        link.download = `${targetId}.png`;
         link.style.display = "none";
         document.body.appendChild(link);
         link.click();
