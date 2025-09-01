@@ -124,7 +124,7 @@ export const Header = () => {
           <SheetTitle>
             {userSession? ` Welcome ${userSession?.user.name}!` : "Account Info"}</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+          {userSession? ` Here are your account details ${userSession?.user.name}, Enjoy shopping!` : "Sign In to view account details"}
           </SheetDescription>
         </SheetHeader>
         <div className="grid flex-1 auto-rows-min gap-6 px-4">
@@ -204,10 +204,10 @@ export const Header = () => {
                 </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
-                  <SheetTitle>Are you absolutely sure?</SheetTitle>
+                  <SheetTitle>            {userSession? ` Welcome ${userSession?.user.name}!` : "Account Info"}
+                  </SheetTitle>
                   <SheetDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
+                  {userSession? ` Here are your account details ${userSession?.user.name}, Enjoy shopping!` : "Sign In to view account details"}
                   </SheetDescription>
                 </SheetHeader>
         <SheetFooter>
