@@ -26,7 +26,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <CarouselContent>
             <CarouselItem >
               <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
-                <CardContent className="p-8 lg:p-10" >
+                <CardContent className="p-8 lg:p-10" id={vinyl.title} >
                   <div id="my-node" className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
                     <div className="bg-white p-6">
                       <div className="relative mb-6 flex justify-center" >
@@ -109,7 +109,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           
           <PayButton amount={vinyl.price * 100} />
           {/* Just for testing the card download */}
-          <DownloadCardButton targetId="my-node" />
+          <DownloadCardButton targetId={vinyl.title} />
         </div>
       </section>
     </main>
