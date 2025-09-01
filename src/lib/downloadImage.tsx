@@ -40,63 +40,51 @@
 //     </button>
 //   );
 // }
+
 "use client";
+import React, { useCallback } from 'react';
+import { toPng } from 'html-to-image';
 
-import React, { useRef, useCallback } from "react";
-import { toPng } from "html-to-image";
-
-interface DownloadCardButtonProps {
-  targetId: string;
-}
-
-export const DownloadCardButton: React.FC<DownloadCardButtonProps> = ({ targetId }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const handleDownload = useCallback(async () => {
-    const node = ref.current || document.getElementById(targetId);
-    if (!node) return;
-
-    try {
-      const rect = node.getBoundingClientRect();
-
-      const dataUrl = await toPng(node, {
-        pixelRatio: 6,
-        fontEmbedCSS: "font-sans",
-        width: rect.width,
-        height: rect.height,
-      });
-
-      // Detect iOS Safari
-      const isIosSafari =
-        /iP(hone|od|ad)/.test(navigator.userAgent) &&
-        /Safari/.test(navigator.userAgent) &&
-        !/Chrome|CriOS|FxiOS|OPiOS|EdgiOS/.test(navigator.userAgent);
-
-      if (/Mobi|Android/i.test(navigator.userAgent) || isIosSafari) {
-        // Open in new tab on mobile or iOS Safari
-        window.open(dataUrl, "_blank");
-      } else {
-        const link = document.createElement("a");
-        link.href = dataUrl;
-        link.download = `${targetId}.png`;
-        link.click();
-      }
-    } catch (err) {
-      console.error("Failed to capture node:", err);
+export function DownloadCardButton({ targetId }: { targetId: string }) {
+  const handleDownload = useCallback(() => {
+    const node = document.getElementById(targetId);
+    if (node === null) {
+      return;
     }
+
+    toPng(node, { 
+      cacheBust: true,
+      pixelRatio: 6, 
+      fontEmbedCSS: "font-sans" 
+    })
+      .then((dataUrl) => {
+        // Detect iOS Safari
+        const isIosSafari =
+          /iP(hone|od|ad)/.test(navigator.userAgent) &&
+          /Safari/.test(navigator.userAgent) &&
+          !/Chrome|CriOS|FxiOS|OPiOS|EdgiOS/.test(navigator.userAgent);
+
+        if (/Mobi|Android/i.test(navigator.userAgent) || isIosSafari) {
+          // open in new tab on mobile or iOS Safari
+          window.open(dataUrl, "_blank");
+        } else {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = `${targetId}.png`;
+          link.click();
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to capture node:", err);
+      });
   }, [targetId]);
 
   return (
-    <>
-      <div ref={ref} id={targetId}>
-        {/* DOM nodes you want to convert to PNG */}
-      </div>
-      <button
-        onClick={handleDownload}
-        className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-      >
-        Download Preview
-      </button>
-    </>
+    <button
+      onClick={handleDownload}
+      className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+    >
+      Download Preview
+    </button>
   );
-};
+}
