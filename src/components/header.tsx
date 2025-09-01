@@ -174,7 +174,7 @@ export const Header = () => {
           </div>
 
           {/* Mobile right-side actions */}
-          <div className="grid grid-cols-3 lg:hidden items-center gap-15">
+          <div className="grid grid-cols-3 lg:hidden items-center gap-10">
 {/*             
             <Button className="flex justify-start" variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

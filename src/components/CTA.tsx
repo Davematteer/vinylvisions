@@ -24,9 +24,12 @@ export const CTA = () => (
         </div>
         
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-md sm:max-w-none px-2">
-          <Button className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px] gap-2 sm:gap-4 bg-black text-white hover:bg-gray-800 py-3">
-            Jump on a call <PhoneCall className="w-4 h-4" />
+          <Link href="login">
+           <Button className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px] gap-2 sm:gap-4 bg-black text-white hover:bg-gray-800 py-3">
+            Login and Start browsing! <PhoneCall className="w-4 h-4" />
           </Button>
+          </Link>
+         
         <Link href="signup">
           <Button className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px] gap-2 sm:gap-4 bg-gray-200 text-black hover:bg-gray-300 py-3">
             Sign up here <MoveRight className="w-4 h-4" />
