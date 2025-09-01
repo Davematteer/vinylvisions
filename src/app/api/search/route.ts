@@ -31,8 +31,8 @@ export async function GET(req: Request) {
     const searchData = await searchRes.json();
 
     return NextResponse.json(searchData);
-  } catch (err: any) {
-    return NextResponse.json(
+  } catch (err: unknown) {
+    if (err instanceof Error) return NextResponse.json(
       { error: "Something went wrong", message: err.message },
       { status: 500 }
     );

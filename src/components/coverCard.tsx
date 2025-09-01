@@ -1,6 +1,5 @@
 // honestly i dont even know if this file is being used ._.
 
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import Image from "next/image";

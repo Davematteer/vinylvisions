@@ -1,6 +1,12 @@
 export const dynamic = "force-dynamic";
 
+import { Album } from "genius-lyrics";
 import { NextResponse } from "next/server";
+
+type Track = {
+  name: string;
+  // add other fields if needed
+};
 
 
 export async function GET(req: Request) {
@@ -38,13 +44,13 @@ export async function GET(req: Request) {
     const payload = {
       image: album.images?.[0]?.url ?? null,
       title: album.name,
-      artist: album.artists?.map((a: any) => a.name).join(", ") ?? "",
-      songs: album.tracks?.items?.map((t: any) => t.name) ?? [],
+      artist: album.artists?.map((a: Album) => a.name).join(", ") ?? "",
+      songs: album.tracks?.items?.map((t: Track) => t.name) ?? [],
       price: 0, // placeholder so your .toFixed(2) won't crash
     };
 
     return NextResponse.json(payload);
-  } catch (e: any) {
-    return NextResponse.json({ error: "Server error", message: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    if (e instanceof Error) return NextResponse.json({ error: "Server error", message: e.message }, { status: 500 });
   }
 }

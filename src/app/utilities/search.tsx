@@ -45,7 +45,7 @@ export function OpenSearch({
         const data = JSON.parse(text); // now parse manually
         setResults(data.albums?.items || []);
       } catch (err) {
-        if ((err as any).name !== "AbortError") {
+        if ((err instanceof Error) && err.name !== "AbortError") {
           console.error("Fetch error:", err);
         }
       }

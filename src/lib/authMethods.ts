@@ -1,5 +1,4 @@
 "use client"
-import {useRouter} from "next/navigation";
 import { authClient } from "./auth-client";
 
 export async function SignOut(router:ReturnType<typeof import("next/navigation").useRouter>){

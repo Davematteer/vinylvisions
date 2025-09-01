@@ -16,8 +16,8 @@ export async function POST(req: Request) {
     const data = await res.json();
     return NextResponse.json(data);
 
-  } catch (err: any) {
-    return NextResponse.json(
+  } catch (err:unknown) {
+    if (err instanceof Error) return NextResponse.json(
       { error: `Failed to initialize transaction: ${err.message}` },
       { status: 500 }
     );

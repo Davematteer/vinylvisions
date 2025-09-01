@@ -26,7 +26,7 @@ export async function redirect({ email, amount }: { email: string; amount: numbe
 
     const data: PaymentResponse = await res.json()
 
-  if (!data.status) {
+  if (!data.data) {
     console.error("Paystack error:", data.message);
     return;
   }

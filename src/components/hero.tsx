@@ -1,5 +1,4 @@
 "use client"
-import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -31,6 +30,7 @@ import {
 import { LyricsCard } from "./lyricsCard";
 import { useState } from "react";
 import { OpenSearch } from "@/app/utilities/search";
+import { MoveRight } from "lucide-react";
 
 export const Hero = () => {
 
@@ -43,7 +43,6 @@ export const Hero = () => {
     <div className="container mx-auto">
       <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2">
         
-        {/* LEFT CONTENT */}
         <div className="flex flex-col gap-4 items-center lg:items-start text-center lg:text-left">
           <div>
             <Badge variant="outline">We&apos;re live!</Badge>
@@ -63,7 +62,6 @@ export const Hero = () => {
           </div>
         </div>
   
-        {/* RIGHT CONTENT (unchanged) */}
         <div className="rounded-md aspect-square flex justify-center items-center ">
           <Carousel
             className="flex justify-center items-center md:p-20 p-2"
