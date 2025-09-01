@@ -2,6 +2,8 @@
 import { CTA } from "@/components/CTA";
 import { Hero } from "@/components/hero";
 import { CardsforHomepage } from "@/components/cardsForHomepage";
+import path from "path";
+import fs from "fs/promises";
 
 export interface Cover {
   id: number;
@@ -13,11 +15,11 @@ export interface Cover {
   songs: string[];
 }
 
-// Server-side fetch from JSON file
+// Server-side read from JSON file
 const getCovers = async (): Promise<Cover[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/data.json`);
-  if (!res.ok) throw new Error("Failed to fetch covers");
-  const data = await res.json();
+  const filePath = path.join(process.cwd(), "public", "data.json");
+  const jsonData = await fs.readFile(filePath, "utf-8");
+  const data = JSON.parse(jsonData);
   return data.covers;
 };
 

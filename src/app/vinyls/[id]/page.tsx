@@ -11,6 +11,8 @@ import {
 import { LyricsCard } from "@/components/lyricsCard";
 import PayButton from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
+import path from "path";
+import fs from "fs/promises";
 
 export interface Cover {
   id: number;
@@ -22,11 +24,11 @@ export interface Cover {
   songs: string[];
 }
 
-// Server-side function to read JSON from public folder
+// Server-side read from JSON file
 const getCovers = async (): Promise<Cover[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/data.json`);
-  if (!res.ok) throw new Error("Failed to fetch covers");
-  const data = await res.json();
+  const filePath = path.join(process.cwd(), "public", "data.json");
+  const jsonData = await fs.readFile(filePath, "utf-8");
+  const data = JSON.parse(jsonData);
   return data.covers;
 };
 
@@ -103,7 +105,9 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
         <div className="flex flex-col justify-start gap-6 p-10">
           <p className="text-6xl font-light">{vinyl.title}</p>
           <p className="text-xl font-light text-gray-800">{vinyl.artist}</p>
-          <p className="text-2xl font-light text-gray-900">GHc{vinyl.price.toFixed(2)}</p>
+          <p className="text-2xl font-light text-gray-900">
+            GHc{vinyl.price.toFixed(2)}
+          </p>
 
           <div>
             <label className="block text-sm font-medium mb-1">Size</label>

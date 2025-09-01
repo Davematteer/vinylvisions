@@ -18,7 +18,8 @@ export async function GET(req: Request) {
 
   try {
     // get your token from your existing token route (change path if yours is /api/spotify-token)
-    const tokenRes = await fetch(`http://localhost:3000/api/token`);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const tokenRes = await fetch(`${baseUrl}/api/token`);
     const tokenData = await tokenRes.json();
 
     if (!tokenData.access_token) {
