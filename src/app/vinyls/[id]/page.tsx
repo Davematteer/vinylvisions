@@ -53,7 +53,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                   <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
                     <div className="bg-white p-6">
                       <div className="relative mb-6 flex justify-center">
-                        <Image
+                        <img
                           src={vinyl.image}
                           alt={vinyl.title}
                           width={400}
