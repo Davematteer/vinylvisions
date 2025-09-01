@@ -212,14 +212,32 @@ export const Header = () => {
                 </SheetHeader>
         <SheetFooter>
           
-          <SheetClose asChild>
+        { !userSession ? (        
+          <>
+            <SheetClose asChild>
               <Link href="/login">
               <Button className="w-full">
               Login
               </Button>
               </Link>
+           </SheetClose>
+           <SheetClose asChild>
+              <Link href="/signup">
+              <Button className="w-full">
+              Sign Up
+              </Button>
+              </Link>
+           </SheetClose>
+          </>
+          ) : ( <SheetClose asChild>
+              <Link href="/" onClick={() => SignOut(router)}>
+              <Button className="w-full" onClick={()=>{toast(`${userSession.user.name} signed out!`)}}>
+              Logout
+              </Button>
+              </Link>
 
-          </SheetClose>
+          </SheetClose>) }   
+          
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
