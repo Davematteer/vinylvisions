@@ -174,7 +174,7 @@ export const Header = () => {
           </div>
 
           {/* Mobile right-side actions */}
-          <div className="grid grid-cols-2 lg:hidden items-center gap-8">
+          <div className="grid grid-cols-2 lg:hidden items-center gap-15">
 {/*             
             <Button className="flex justify-start" variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -182,7 +182,7 @@ export const Header = () => {
 
               <Link 
               href="/"
-              className="flex justify-center">
+              className="flex justify-start">
             <Image
             src="/logo.png"
             alt="app logo"
