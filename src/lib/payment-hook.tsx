@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { UserSession } from "./authMethods"
 import { Wallet } from "lucide-react"
+import { toast } from "sonner"
 
 type PaymentResponse = {
   status: boolean
@@ -40,6 +41,59 @@ export async function redirect({ email, amount }: { email: string; amount: numbe
     popup.resumeTransaction(access_code)
   } catch (err) {
     console.error("Payment error:", err)
+  }
+}
+
+export async function checkoutredirect({ email, amount }: { email: string; amount: number }): Promise<string> {
+  try {
+    const res = await fetch("/api/payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        amount, // must be in kobo (5000 = ₦50)
+      }),
+    })
+    
+    const data: PaymentResponse = await res.json()
+    if (!data.data) {
+      console.error("Paystack error:", data.message);
+      return "error";
+    }
+
+    const { access_code } = data.data
+    
+    // Load Paystack only on the client
+    const { default: PaystackPop } = await import("@paystack/inline-js")
+    const popup = new PaystackPop()
+    
+    // Wrap in a Promise to handle the async callbacks
+    return new Promise((resolve) => {
+      popup.resumeTransaction(access_code, {
+        onSuccess: (transaction) => {
+          console.log('Payment completed:', transaction)
+          toast.success('Payment successful! Verifying...')
+          resolve("success") // Resolve the Promise with "success"
+        },
+        
+        onCancel: () => {
+          console.log('Payment cancelled by user')
+          toast.error('Payment was cancelled')
+          resolve("cancelled") // Resolve with "cancelled"
+        },
+        
+        onError: (error) => {
+          console.error('Payment error:', error)
+          toast.error('Payment failed. Please try again.')
+          resolve("error") // Resolve with "error"
+        }
+      })
+    })
+    
+  } catch (err) {
+    console.error("Payment error:", err)
+    toast.error('Payment initialization failed')
+    return "error"
   }
 }
 

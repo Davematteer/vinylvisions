@@ -15,7 +15,7 @@ import { clearCart, readCart } from "@/lib/searchHistory"
 import { useState } from "react"
 import { UserSession } from "@/lib/authMethods"
 import { useRouter } from "next/navigation"
-import { redirect } from "@/lib/payment-hook"
+import { checkoutredirect, redirect } from "@/lib/payment-hook"
 import { toast } from "sonner"
 
 export function CartSheet() {
@@ -26,7 +26,7 @@ export function CartSheet() {
   const email = userSession?.user.email!
   const router = useRouter()
   
-  function checkout() {
+  async function checkout() {
     const cartItems = readCart();
     let total = 0
     cartItems.forEach(item => total += (item.price));
@@ -39,10 +39,15 @@ export function CartSheet() {
         return toast("No item in cart! Add before checkout!")
 
       }
-    userSession ? redirect({ email: email, amount: (total * 100) }) : router.push("/login")
+    
+    const result = checkoutredirect({ email: email, amount: (total * 100) })
+    userSession ?  result : router.push("/login")
     
     // Clear cart after checkout
-    clearCart()
+    
+    if ((await result) === "success"){
+      clearCart()
+    }
     
     // Close the cart sheet as well
   }
