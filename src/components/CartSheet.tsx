@@ -12,7 +12,7 @@ import {
 import { LucideTrash2, ShoppingBag, ShoppingCart, ShoppingCartIcon, SidebarCloseIcon } from "lucide-react"
 import { AllCart } from "./AllCartComponent"
 import { clearCart, readCart } from "@/lib/searchHistory"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { UserSession } from "@/lib/authMethods"
 import { useRouter } from "next/navigation"
 import { checkoutredirect, redirect } from "@/lib/payment-hook"
@@ -20,18 +20,22 @@ import { toast } from "sonner"
 
 export function CartSheet() {
   const [cart, setCart] = useState<string>()
-  
+ 
   
   const userSession = UserSession()
   const email = userSession?.user.email!
   const router = useRouter()
   
-  function getCartTotal(){
-    const cartItems = readCart();
-    let total = 0
-    cartItems.forEach(item => total += (item.price));
-    return total;
-  }
+  const [cartItems, setCartItems] = useState<any[]>([])
+
+  // Load cart items when component mounts
+  useEffect(() => {
+    setCartItems(readCart())
+  }, [])
+
+  // Calculate total from state
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0)
+
 
   async function checkout() {
     const cartItems = readCart();
@@ -77,7 +81,7 @@ export function CartSheet() {
             Items to checkout
             </SheetDescription>
             <SheetDescription>
-            Total: {getCartTotal()}
+            Total: {total}
           </SheetDescription>
         </SheetHeader>
         <AllCart />
