@@ -26,6 +26,13 @@ export function CartSheet() {
   const email = userSession?.user.email!
   const router = useRouter()
   
+  function getCartTotal(){
+    const cartItems = readCart();
+    let total = 0
+    cartItems.forEach(item => total += (item.price));
+    return total;
+  }
+
   async function checkout() {
     const cartItems = readCart();
     let total = 0
@@ -68,6 +75,9 @@ export function CartSheet() {
           </SheetTitle>
           <SheetDescription>
             Items to checkout
+            </SheetDescription>
+            <SheetDescription>
+            Total: {getCartTotal()}
           </SheetDescription>
         </SheetHeader>
         <AllCart />
