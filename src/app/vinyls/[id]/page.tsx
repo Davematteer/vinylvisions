@@ -46,7 +46,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
   const historyitem:HistoryItem = {
     name:(vinyl.title as string),
     image: (vinyl.image as string),
-    path:(`/${id}` as string),
+    path:(`/vinyls/${id}` as string),
     artist:(vinyl.artist as string),
     title:(vinyl.title as string)};
 

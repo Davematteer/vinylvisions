@@ -25,7 +25,7 @@ export function HistoryCarousel(){
                 key={h.path}
                 className="basis-1/3 sm:basis-1/3  pl-1"
               >
-                <Link href={`vinyls/${h.path}`} className="block group">
+                <Link href={h.path} className="block group">
                   <Card className="bg-white hover:bg-gradient-to-b hover:from-gray-100 hover:to-gray-300 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border-none group-hover:scale-[1.02] transform rounded-none">
                     <CardContent className="p-4">
                       <div className="relative mb-3 flex justify-center">
