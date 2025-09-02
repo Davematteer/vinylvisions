@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -12,15 +10,32 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { LucideTrash2, ShoppingBag, ShoppingCartIcon, SidebarCloseIcon } from "lucide-react"
-import Link from "next/link"
 import { AllCart } from "./AllCartComponent"
-import { clearCart } from "@/lib/searchHistory"
+import { clearCart, readCart } from "@/lib/searchHistory"
 import { useState } from "react"
+import { UserSession } from "@/lib/authMethods"
+import { useRouter } from "next/navigation"
+import { redirect } from "@/lib/payment-hook"
 
 export function CartSheet() {
 
   const [cart, setCart] = useState<string>()
   
+  const cartItems = readCart();
+  const userSession = UserSession()
+  const email = userSession?.user.email!
+  const router = useRouter()
+
+
+  function checkout(){
+    let total = 0
+    cartItems.forEach(item => total += item.price );
+    
+    userSession ? redirect({ email:email, amount:(total *100) }) : router.push("/login") 
+    // at the end clear cart after checkout 
+    clearCart()
+  }
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -41,7 +56,7 @@ export function CartSheet() {
         <SheetFooter>
        
           <SheetClose asChild>
-          <Button>
+          <Button onClick={checkout}>
                Checkout Cart <ShoppingBag />
             </Button>
           </SheetClose>
