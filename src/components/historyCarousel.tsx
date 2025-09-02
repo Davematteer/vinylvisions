@@ -7,8 +7,13 @@ export function HistoryCarousel() {
   const history = readHistory(10);
 
   return (
+    <>
+     <div>
+            <span className="font-light font-sans text-muted-foreground text-sm">History</span>
+        </div>
     <div className="w-full overflow-x-auto">
       <div className="flex gap-2 p-2">
+       
         {history.map((h: HistoryItem) => (
           <div key={h.path} className="min-w-[140px] sm:min-w-[160px]">
             <Link href={h.path} className="block group">
@@ -44,5 +49,6 @@ export function HistoryCarousel() {
         ))}
       </div>
     </div>
+    </>
   );
 }

@@ -13,12 +13,17 @@ import {
 } from "@/components/ui/sheet"
 import { SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
+import { AllHistory } from "./AllHistoryComponent"
 
 export function HistorySheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">View All</Button>
+        <div className="px-4">
+        <Button variant="outline" className="w-full">
+          View History
+          </Button>
+        </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -27,16 +32,7 @@ export function HistorySheet() {
            Search History 
           </SheetDescription>
         </SheetHeader>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-name">Name</Label>
-            <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-username">Username</Label>
-            <Input id="sheet-demo-username" defaultValue="@peduarte" />
-          </div>
-        </div>
+       <AllHistory />
         <SheetFooter>
           <SheetClose asChild>
             <Button variant="outline">
