@@ -21,17 +21,24 @@ import { toast } from "sonner"
 export function CartSheet() {
   const [cart, setCart] = useState<string>()
   
-  const cartItems = readCart();
+  
   const userSession = UserSession()
   const email = userSession?.user.email!
   const router = useRouter()
   
   function checkout() {
+    const cartItems = readCart();
     let total = 0
-    cartItems.forEach(item => total += item.price);
+    cartItems.forEach(item => total += (item.price));
     
     // Close the history sheet when checkout is clicked
-    if (total === 0){return toast("No item in cart! Add before checkout!")}
+    if (total === 0)
+      {
+        console.log(total)
+        console.log(cartItems)
+        return toast("No item in cart! Add before checkout!")
+
+      }
     userSession ? redirect({ email: email, amount: (total * 100) }) : router.push("/login")
     
     // Clear cart after checkout
