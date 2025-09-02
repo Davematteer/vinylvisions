@@ -11,19 +11,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
 
-export function SheetDemo() {
+export function HistorySheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button variant="outline">View All</Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
+          <SheetTitle>History</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+           Search History 
           </SheetDescription>
         </SheetHeader>
         <div className="grid flex-1 auto-rows-min gap-6 px-4">
@@ -37,13 +38,10 @@ export function SheetDemo() {
           </div>
         </div>
         <SheetFooter>
-          <Button>
-            <Link href="/login">
-              Login
-            </Link>
-          </Button>
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">
+              <SidebarCloseIcon /> Back
+              </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

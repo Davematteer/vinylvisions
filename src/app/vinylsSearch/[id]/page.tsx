@@ -10,6 +10,8 @@ import {
 import { LyricsCard } from "@/components/lyricsCard";
 import PayButton from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
+import { HistoryItem, saveHistory } from "@/lib/searchHistory";
+import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
@@ -18,6 +20,15 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
   });
   const vinyl = await res.json();
   vinyl.price = 100;
+
+  const historyitem:HistoryItem = {
+    name:(vinyl.title as string),
+    image: (vinyl.image as string),
+    path:(`/${id}` as string),
+    artist:(vinyl.artist as string),
+    title:(vinyl.title as string)};
+
+
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -110,6 +121,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <PayButton amount={vinyl.price * 100} />
           {/* Just for testing the card download */}
           <DownloadCardButton targetId={vinyl.title} />
+          <HistoryWrapperComponent item={historyitem} />
         </div>
       </section>
     </main>

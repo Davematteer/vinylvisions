@@ -13,6 +13,8 @@ import PayButton from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
 import path from "path";
 import fs from "fs/promises";
+import { HistoryItem, saveHistory } from "@/lib/searchHistory";
+import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
 
 export interface Cover {
   id: number;
@@ -41,6 +43,14 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
 
   if (!vinyl) return <p>Vinyl not found</p>;
 
+  const historyitem:HistoryItem = {
+    name:(vinyl.title as string),
+    image: (vinyl.image as string),
+    path:(`/${id}` as string),
+    artist:(vinyl.artist as string),
+    title:(vinyl.title as string)};
+
+    // i did this incase it doesnt parse 
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -136,6 +146,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
           </button>
           <PayButton amount={vinyl.price * 100} />
           <DownloadCardButton targetId={vinyl.title} />
+          <HistoryWrapperComponent item={historyitem} />
         </div>
       </section>
     </main>
