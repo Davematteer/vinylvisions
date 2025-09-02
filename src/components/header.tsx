@@ -29,6 +29,7 @@ import {
 import { SignOut, UserSession } from "@/lib/authMethods";
 import { HistorySheet } from "./historySheet";
 import { HistoryCarousel } from "./historyCarousel";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 
 
@@ -121,7 +122,11 @@ export const Header = () => {
             
             <Sheet>
       <SheetTrigger asChild>
-      <User className="w-5 h-5" />
+      <Avatar>
+        <AvatarImage src={userSession?.user.image ?? undefined} alt={userSession?.user.name} />
+        <AvatarFallback><User className="w-5 h-5" /></AvatarFallback>
+     </Avatar>
+      
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
