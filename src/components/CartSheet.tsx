@@ -17,7 +17,7 @@ import { UserSession } from "@/lib/authMethods"
 import { useRouter } from "next/navigation"
 import { redirect } from "@/lib/payment-hook"
 
-export function CartSheet() {
+export function CartSheet({isOpen, setIsOpen}:{isOpen:boolean, setIsOpen: (v: boolean) => void}) {
 
   const [cart, setCart] = useState<string>()
   
@@ -26,18 +26,21 @@ export function CartSheet() {
   const email = userSession?.user.email!
   const router = useRouter()
 
-
+  function checkoutRedirect(){
+    
+  }
   function checkout(){
     let total = 0
     cartItems.forEach(item => total += item.price );
     
     userSession ? redirect({ email:email, amount:(total *100) }) : router.push("/login") 
     // at the end clear cart after checkout 
+    setIsOpen(false)
     clearCart()
   }
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <div className="px-4">
         <Button variant="outline" className="w-full">

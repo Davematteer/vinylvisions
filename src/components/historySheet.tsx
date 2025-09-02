@@ -15,9 +15,9 @@ import { SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
 import { AllHistory } from "./AllHistoryComponent"
 
-export function HistorySheet() {
+export function HistorySheet({isOpen, setIsOpen}: {isOpen:boolean,setIsOpen:(v:boolean) => void}) {
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <div className="px-4">
         <Button className="w-full">
