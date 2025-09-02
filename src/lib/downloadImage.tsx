@@ -1,5 +1,6 @@
 "use client";
 import * as htmlToImage from "html-to-image";
+import { Download, DownloadIcon } from "lucide-react";
 
 export const handleDownload = async (targetId: string) => {
   const node = document.getElementById(targetId);
@@ -59,11 +60,14 @@ export const handleDownload = async (targetId: string) => {
 
 export function DownloadCardButton({ targetId }: { targetId: string }) {
   return (
+   <>
     <button
       onClick={() => handleDownload(targetId)}
-      className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+      className="flex flex-row gap-4 justify-center bg-black text-white px-4 py-2 rounded hover:bg-gray-800 w-full"
     >
-      Download Preview
+      <p>Download Preview</p> <Download className="mt-2 font-extralight text-white text-sm"/>
     </button>
+    
+   </>
   );
 }

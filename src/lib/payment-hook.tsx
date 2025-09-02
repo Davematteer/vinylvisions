@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { UserSession } from "./authMethods"
+import { Wallet } from "lucide-react"
 
 type PaymentResponse = {
   status: boolean
@@ -53,12 +54,12 @@ export default function PayButton({
 
   return (
     <button
-      className="bg-black text-white py-3 rounded-lg hover:bg-gray-800"
+      className="flex flex-row gap-2 justify-center bg-black text-white py-3 rounded-lg hover:bg-gray-800"
       onClick={() => {
         (userSession ? redirect({ email, amount }) : router.push("/login") )
       }}
     >
-      Buy Now
+      Buy Now <Wallet className="font-extralight text-white text-sm"/>
     </button>
   )
 }
