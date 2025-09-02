@@ -207,7 +207,10 @@ export const Header = () => {
          {/* Sheet for mobile*/} 
             <Sheet>
               <SheetTrigger>
-                <User className="w-5 h-5" />
+              <Avatar>
+        <AvatarImage src={userSession?.user.image ?? undefined} alt={userSession?.user.name} />
+        <AvatarFallback><User className="w-5 h-5" /></AvatarFallback>
+     </Avatar>
                 </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
