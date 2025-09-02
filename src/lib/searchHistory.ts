@@ -50,7 +50,14 @@ export interface CartItem {
 
   // cart logic 
   function getCart(): CartItem[] {
-    return JSON.parse(localStorage.getItem("vinylCart") || "[]");
+    try {
+      if (typeof window !== 'undefined') {
+        return JSON.parse(localStorage.getItem("vinylCart") || "[]");
+      }
+    } catch (error) {
+      console.error('Error reading cart:', error);
+    }
+    return [];
   }
   
   export function readCart(limit?: number): CartItem[] {

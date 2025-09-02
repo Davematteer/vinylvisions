@@ -14,10 +14,12 @@ import {
 import { SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
 import { AllHistory } from "./AllHistoryComponent"
+import { useState } from "react"
 
-export function HistorySheet({isOpen, setIsOpen}: {isOpen:boolean,setIsOpen:(v:boolean) => void}) {
+export function HistorySheet() {
+
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet >
       <SheetTrigger asChild>
         <div className="px-4">
         <Button className="w-full">
@@ -32,7 +34,9 @@ export function HistorySheet({isOpen, setIsOpen}: {isOpen:boolean,setIsOpen:(v:b
            Search History 
           </SheetDescription>
         </SheetHeader>
-       <AllHistory />
+        
+       <AllHistory/>
+        
         <SheetFooter>
           <SheetClose asChild>
             <Button variant="outline">

@@ -9,69 +9,72 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { LucideTrash2, ShoppingBag, ShoppingCartIcon, SidebarCloseIcon } from "lucide-react"
+import { LucideTrash2, ShoppingBag, ShoppingCart, ShoppingCartIcon, SidebarCloseIcon } from "lucide-react"
 import { AllCart } from "./AllCartComponent"
 import { clearCart, readCart } from "@/lib/searchHistory"
 import { useState } from "react"
 import { UserSession } from "@/lib/authMethods"
 import { useRouter } from "next/navigation"
 import { redirect } from "@/lib/payment-hook"
+import { toast } from "sonner"
 
-export function CartSheet({isOpen, setIsOpen}:{isOpen:boolean, setIsOpen: (v: boolean) => void}) {
-
+export function CartSheet() {
   const [cart, setCart] = useState<string>()
   
   const cartItems = readCart();
   const userSession = UserSession()
   const email = userSession?.user.email!
   const router = useRouter()
-
-  function checkoutRedirect(){
-    
-  }
-  function checkout(){
+  
+  function checkout() {
     let total = 0
-    cartItems.forEach(item => total += item.price );
+    cartItems.forEach(item => total += item.price);
     
-    userSession ? redirect({ email:email, amount:(total *100) }) : router.push("/login") 
-    // at the end clear cart after checkout 
-    setIsOpen(false)
+    // Close the history sheet when checkout is clicked
+    if (total === 0){return toast("No item in cart! Add before checkout!")}
+    userSession ? redirect({ email: email, amount: (total * 100) }) : router.push("/login")
+    
+    // Clear cart after checkout
     clearCart()
+    
+    // Close the cart sheet as well
   }
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet>
       <SheetTrigger asChild>
         <div className="px-4">
-        <Button variant="outline" className="w-full">
-          View Cart
+          <Button variant="outline" className="w-full">
+            <ShoppingCart />
           </Button>
         </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle className="flex flex-row gap-2">Cart <ShoppingCartIcon className="mt-2"/></SheetTitle>
+          <SheetTitle className="flex flex-row gap-2">
+            Cart <ShoppingCartIcon className="mt-2"/>
+          </SheetTitle>
           <SheetDescription>
-           Items to checkout 
+            Items to checkout
           </SheetDescription>
         </SheetHeader>
-       <AllCart />
+        <AllCart />
         <SheetFooter>
-       
           <SheetClose asChild>
           <Button onClick={checkout}>
-               Checkout Cart <ShoppingBag />
-            </Button>
+            Checkout Cart <ShoppingBag />
+          </Button>
           </SheetClose>
-          <Button variant="outline" onClick={() => {clearCart()
+          <Button variant="outline" onClick={() => {
+            clearCart()
             setCart("")
           }}>
-               Clear Cart <LucideTrash2 />
-            </Button>
+            Clear Cart <LucideTrash2 />
+          </Button>
           <SheetClose asChild>
             <Button>
-               Back<SidebarCloseIcon />
-              </Button>
+              Back<SidebarCloseIcon />
+            </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

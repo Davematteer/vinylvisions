@@ -37,7 +37,6 @@ import { CartSheet } from "./CartSheet";
 export const Header = () => {
   const userSession = UserSession();
   const router = useRouter();
-  const [activeSheet, setActiveSheet] = useState<"history" | "cart" | null>(null);
 
   const navigationItems = [
     {
@@ -121,6 +120,7 @@ export const Header = () => {
             
             
             <div className="border-r h-6" />
+            <CartSheet />   
             
             <Sheet>
       <SheetTrigger asChild>
@@ -141,10 +141,7 @@ export const Header = () => {
         <div className="grid flex-1 auto-rows-min gap-6 px-4">
           <HistoryCarousel/>
         </div>
-            <HistorySheet isOpen={activeSheet === "history"}
-        setIsOpen={(v) => setActiveSheet(v ? "history" : null)}/>   
-            <CartSheet   isOpen={activeSheet === "cart"}
-        setIsOpen={(v) => setActiveSheet(v ? "cart" : null)}/>   
+            <HistorySheet />   
         <SheetFooter> 
           { !userSession ? (        
           <>
@@ -210,6 +207,8 @@ export const Header = () => {
             </Button>
 
          {/* Sheet for mobile*/} 
+         <CartSheet />   
+
             <Sheet>
               <SheetTrigger>
               <Avatar>
@@ -228,10 +227,7 @@ export const Header = () => {
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
           <HistoryCarousel/>
         </div>
-            <HistorySheet   isOpen={activeSheet === "history"}
-        setIsOpen={(v) => setActiveSheet(v ? "history" : null)}/>
-            <CartSheet   isOpen={activeSheet === "cart"}
-        setIsOpen={(v) => setActiveSheet(v ? "cart" : null)}/>   
+            <HistorySheet />
         <SheetFooter>
           
         { !userSession ? (        
