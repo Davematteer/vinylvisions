@@ -1,7 +1,7 @@
 import { CartItem, readCart } from "@/lib/searchHistory";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent, CardFooter } from "./ui/card";
 
 export function AllCart() {
   const cart = readCart();
@@ -36,6 +36,9 @@ export function AllCart() {
                       </p>
                     </div>
                   </CardContent>
+                  <CardFooter className="font-light flex justify-center">
+                    GHc {h.price}.00
+                  </CardFooter>
                 </Card>
               </Link>
             </div>
