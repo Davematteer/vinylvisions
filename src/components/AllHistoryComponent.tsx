@@ -8,11 +8,6 @@ export function AllHistory() {
 
   return (
     <>
-      <div>
-        <span className="font-light font-sans text-muted-foreground text-sm">
-          History
-        </span>
-      </div>
       <div className="w-full max-h-[500px] overflow-y-auto p-2">
         <div className="grid grid-cols-2 gap-3">
           {history.map((h: HistoryItem) => (
