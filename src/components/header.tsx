@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-import { Menu, MoveRight, X, User, Search } from "lucide-react";
+import { Menu, MoveRight, X, User, Search, PanelRightCloseIcon, LogOut, LucideArrowBigRightDash, LucideLogIn } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { OpenSearch } from "@/app/utilities/search";
@@ -223,14 +223,14 @@ export const Header = () => {
             <SheetClose asChild>
               <Link href="/login">
               <Button className="w-full">
-              Login
+              Login <LucideLogIn />
               </Button>
               </Link>
            </SheetClose>
            <SheetClose asChild>
               <Link href="/signup">
               <Button className="w-full">
-              Sign Up
+              Sign Up <LucideArrowBigRightDash />
               </Button>
               </Link>
            </SheetClose>
@@ -238,14 +238,15 @@ export const Header = () => {
           ) : ( <SheetClose asChild>
               <Link href="/" onClick={() => SignOut(router)}>
               <Button className="w-full" onClick={()=>{toast(`${userSession.user.name} signed out!`)}}>
-              Logout
+              Logout <LogOut />
               </Button>
               </Link>
 
           </SheetClose>) }   
           
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">Close <PanelRightCloseIcon/>
+            </Button>
           </SheetClose>
         </SheetFooter>
               </SheetContent>

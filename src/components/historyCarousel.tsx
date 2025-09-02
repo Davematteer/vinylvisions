@@ -2,15 +2,20 @@ import { HistoryItem, readHistory } from "@/lib/searchHistory";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "./ui/card";
+import { HistoryIcon } from "lucide-react";
 
 export function HistoryCarousel() {
   const history = readHistory(10);
 
   return (
     <>
-     <div>
-            <span className="font-light font-sans text-muted-foreground text-sm">History</span>
-        </div>
+     <div className="flex flex-row items-center gap-1">
+    <span className="font-light font-sans text-muted-foreground text-sm">
+        History
+    </span>
+    <HistoryIcon className="w-4 h-4 text-muted-foreground" />
+    </div>
+
     <div className="w-full overflow-x-auto">
       <div className="flex gap-2 p-2">
        
