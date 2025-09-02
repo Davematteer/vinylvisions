@@ -36,8 +36,8 @@ export function AllCart() {
                       </p>
                     </div>
                   </CardContent>
-                  <CardFooter className="font-light flex justify-center">
-                    GHc {h.price}.00
+                  <CardFooter className="font-light flex justify-center text-sm">
+                    GHc{h.price}.00
                   </CardFooter>
                 </Card>
               </Link>
