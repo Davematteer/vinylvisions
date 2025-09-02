@@ -30,6 +30,7 @@ import { SignOut, UserSession } from "@/lib/authMethods";
 import { HistorySheet } from "./historySheet";
 import { HistoryCarousel } from "./historyCarousel";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { CartSheet } from "./CartSheet";
 
 
 
@@ -140,6 +141,7 @@ export const Header = () => {
           <HistoryCarousel/>
         </div>
             <HistorySheet />   
+            <CartSheet />   
         <SheetFooter> 
           { !userSession ? (        
           <>
@@ -223,7 +225,8 @@ export const Header = () => {
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
           <HistoryCarousel/>
         </div>
-            <HistorySheet />   
+            <HistorySheet />
+            <CartSheet />   
         <SheetFooter>
           
         { !userSession ? (        

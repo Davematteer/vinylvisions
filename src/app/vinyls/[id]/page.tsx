@@ -13,8 +13,9 @@ import PayButton from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
 import path from "path";
 import fs from "fs/promises";
-import { HistoryItem, saveHistory } from "@/lib/searchHistory";
+import { CartItem, HistoryItem, saveHistory } from "@/lib/searchHistory";
 import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
+import { AddtoCartButton } from "@/app/AddtoCartButton";
 
 export interface Cover {
   id: number;
@@ -49,6 +50,15 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
     path:(`/vinyls/${id}` as string),
     artist:(vinyl.artist as string),
     title:(vinyl.title as string)};
+
+    const cartitem:CartItem = {
+      name:(vinyl.title as string),
+      image: (vinyl.image as string),
+      path:(`/vinylsSearch/${id}` as string),
+      artist:(vinyl.artist as string),
+      title:(vinyl.title as string),
+      price:(vinyl.price)};
+  
 
     // i did this incase it doesnt parse 
   return (
@@ -141,9 +151,8 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
-            Add to Cart
-          </button>
+          <AddtoCartButton item={cartitem}/>
+          
           <PayButton amount={vinyl.price * 100} />
           <DownloadCardButton targetId={vinyl.title} />
           <HistoryWrapperComponent item={historyitem} />

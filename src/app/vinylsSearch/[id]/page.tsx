@@ -10,8 +10,9 @@ import {
 import { LyricsCard } from "@/components/lyricsCard";
 import PayButton from "@/lib/payment-hook";
 import { DownloadCardButton } from "@/lib/downloadImage";
-import { HistoryItem, saveHistory } from "@/lib/searchHistory";
+import { CartItem, HistoryItem, saveHistory } from "@/lib/searchHistory";
 import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
+import { AddtoCartButton } from "@/app/AddtoCartButton";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
@@ -28,7 +29,14 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
     artist:(vinyl.artist as string),
     title:(vinyl.title as string)};
 
-
+    const cartitem:CartItem = {
+      name:(vinyl.title as string),
+      image: (vinyl.image as string),
+      path:(`/vinylsSearch/${id}` as string),
+      artist:(vinyl.artist as string),
+      title:(vinyl.title as string),
+      price:(vinyl.price)};
+  
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -114,9 +122,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
             </div>
           </div>
           
-          <button className="bg-gray-100 text-black py-3 rounded-lg hover:bg-white">
-            Add to Cart
-          </button>
+         <AddtoCartButton item={cartitem}/>
           
           <PayButton amount={vinyl.price * 100} />
           {/* Just for testing the card download */}

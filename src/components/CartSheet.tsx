@@ -13,27 +13,36 @@ import {
 } from "@/components/ui/sheet"
 import { SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
-import { AllHistory } from "./AllHistoryComponent"
+import { AllCart } from "./AllCartComponent"
 
-export function HistorySheet() {
+export function CartSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <div className="px-4">
-        <Button className="w-full">
-          View History
+        <Button variant="outline" className="w-full">
+          View Cart
           </Button>
         </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>History</SheetTitle>
+          <SheetTitle>Cart</SheetTitle>
           <SheetDescription>
-           Search History 
+           Items to checkout 
           </SheetDescription>
         </SheetHeader>
-       <AllHistory />
+       <AllCart />
         <SheetFooter>
+       
+          <SheetClose asChild>
+          <Button variant="outline">
+              <SidebarCloseIcon /> Checkout Cart
+            </Button>
+          </SheetClose>
+          <Button variant="outline">
+              <SidebarCloseIcon /> Clear Cart
+            </Button>
           <SheetClose asChild>
             <Button variant="outline">
               <SidebarCloseIcon /> Back

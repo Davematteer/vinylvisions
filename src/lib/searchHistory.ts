@@ -7,7 +7,17 @@ export interface HistoryItem {
     title?:string;
     artist?: string;
   }
+
+export interface CartItem {
+    name: string;
+    image: string;
+    path: string;
+    title?:string;
+    artist?: string;
+    price: number;
+  }
   
+  // history logic
   function getHistory(): HistoryItem[] {
     return JSON.parse(localStorage.getItem("vinylHistory") || "[]");
   }
@@ -35,5 +45,31 @@ export interface HistoryItem {
   export function individualHistory(query: HistoryItem): HistoryItem | undefined {
     const history = getHistory();
     return history.find((h) => h.path === query.path);
+  }
+  
+
+  // cart logic 
+  function getCart(): CartItem[] {
+    return JSON.parse(localStorage.getItem("vinylCart") || "[]");
+  }
+  
+  export function readCart(limit?: number): CartItem[] {
+    const cart = getCart();
+    return limit ? cart.slice(0, limit) : cart;
+  }
+  
+  export function saveCart(query: CartItem): void {
+    let cart = getCart();
+  
+    // remove duplicates (based on path)
+    cart = cart.filter((c) => c.path !== query.path);
+  
+    // add to front
+    cart.unshift(query);
+  
+    // cap at 30
+    if (cart.length > 30) cart = cart.slice(0, 30);
+  
+    localStorage.setItem("vinylCart", JSON.stringify(cart));
   }
   
