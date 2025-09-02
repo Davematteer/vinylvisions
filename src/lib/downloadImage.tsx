@@ -63,7 +63,7 @@ export function DownloadCardButton({ targetId }: { targetId: string }) {
    <>
     <button
       onClick={() => handleDownload(targetId)}
-      className="flex flex-row gap-4 justify-center bg-black text-white px-4 py-2 rounded hover:bg-gray-800 w-full"
+      className="flex flex-row gap-2 justify-center bg-black text-white py-3 rounded-lg hover:bg-gray-800"
     >
       <p>Download Preview</p> <Download className="mt-2 font-extralight text-white text-sm"/>
     </button>
