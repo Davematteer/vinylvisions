@@ -11,11 +11,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { SidebarCloseIcon } from "lucide-react"
+import { LucideTrash2, ShoppingBag, ShoppingCartIcon, SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
 import { AllCart } from "./AllCartComponent"
+import { clearCart } from "@/lib/searchHistory"
+import { useState } from "react"
 
 export function CartSheet() {
+
+  const [cart, setCart] = useState<string>()
+  
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -27,7 +32,7 @@ export function CartSheet() {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Cart</SheetTitle>
+          <SheetTitle className="flex flex-row gap-2">Cart <ShoppingCartIcon className="mt-2"/></SheetTitle>
           <SheetDescription>
            Items to checkout 
           </SheetDescription>
@@ -36,16 +41,18 @@ export function CartSheet() {
         <SheetFooter>
        
           <SheetClose asChild>
-          <Button variant="outline">
-              <SidebarCloseIcon /> Checkout Cart
+          <Button>
+               Checkout Cart <ShoppingBag />
             </Button>
           </SheetClose>
-          <Button variant="outline">
-              <SidebarCloseIcon /> Clear Cart
+          <Button variant="outline" onClick={() => {clearCart()
+            setCart("")
+          }}>
+               Clear Cart <LucideTrash2 />
             </Button>
           <SheetClose asChild>
-            <Button variant="outline">
-              <SidebarCloseIcon /> Back
+            <Button>
+               Back<SidebarCloseIcon />
               </Button>
           </SheetClose>
         </SheetFooter>

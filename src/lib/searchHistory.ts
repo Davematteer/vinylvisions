@@ -73,3 +73,6 @@ export interface CartItem {
     localStorage.setItem("vinylCart", JSON.stringify(cart));
   }
   
+  export function clearCart(){
+    localStorage.removeItem("vinylCart")
+  }
