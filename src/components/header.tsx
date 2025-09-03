@@ -98,38 +98,39 @@ export const Header = () => {
           <HistoryCarousel/>
         </div>
             <HistorySheet />   
-        <SheetFooter> 
+            <SheetFooter>
+          
           { !userSession ? (        
-          <>
+            <>
+              <SheetClose asChild>
+                <Link href="/login">
+                <Button className="w-full">
+                Login <LucideLogIn />
+                </Button>
+                </Link>
+             </SheetClose>
+             <SheetClose asChild>
+                <Link href="/signup">
+                <Button className="w-full">
+                Sign Up <LucideArrowBigRightDash />
+                </Button>
+                </Link>
+             </SheetClose>
+            </>
+            ) : ( <SheetClose asChild>
+                <Link href="/" onClick={() => SignOut(router)}>
+                <Button className="w-full" onClick={()=>{toast(`${userSession.user.name} signed out!`)}}>
+                Logout <LogOut />
+                </Button>
+                </Link>
+  
+            </SheetClose>) }   
+            
             <SheetClose asChild>
-              <Link href="/login">
-              <Button className="w-full">
-              Login
+              <Button variant="outline">Close <PanelRightCloseIcon/>
               </Button>
-              </Link>
-           </SheetClose>
-           <SheetClose asChild>
-              <Link href="/signup">
-              <Button className="w-full">
-              Sign Up
-              </Button>
-              </Link>
-           </SheetClose>
-          </>
-          ) : ( <SheetClose asChild>
-              <Link href="/" onClick={() => SignOut(router)}>
-              <Button className="w-full" onClick={()=>{toast(`${userSession.user.name} signed out!`)}}>
-              Logout
-              </Button>
-              </Link>
-
-          </SheetClose>) }         
-         
-         
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </SheetFooter>
+            </SheetClose>
+          </SheetFooter>
       </SheetContent>
     </Sheet>
           </div>

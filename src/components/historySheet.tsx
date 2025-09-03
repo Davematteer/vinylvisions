@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { SidebarCloseIcon } from "lucide-react"
+import { HistoryIcon, SidebarCloseIcon } from "lucide-react"
 import Link from "next/link"
 import { AllHistory } from "./AllHistoryComponent"
 import { useState } from "react"
@@ -23,7 +23,7 @@ export function HistorySheet() {
       <SheetTrigger asChild>
         <div className="px-4">
         <Button className="w-full">
-          View History
+          View History <HistoryIcon />
           </Button>
         </div>
       </SheetTrigger>
