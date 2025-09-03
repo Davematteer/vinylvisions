@@ -54,7 +54,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
     const cartitem:CartItem = {
       name:(vinyl.title as string),
       image: (vinyl.image as string),
-      path:(`/vinylsSearch/${id}` as string),
+      path:(`/vinyls/${id}` as string),
       artist:(vinyl.artist as string),
       title:(vinyl.title as string),
       price:(vinyl.price)};
