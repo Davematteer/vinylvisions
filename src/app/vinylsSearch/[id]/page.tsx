@@ -66,27 +66,28 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                           {vinyl.artist}
                         </p>
                       </div>
-                     <div className="flex gap-x-4 mb-3 text-xs lg:text-sm">
-                     {Array.from({ length: 3 }).map((_, colIndex) => {
-                            const start = colIndex * 5;
-                            const end = start + 5;
-                            const tracks = vinyl.songs.slice(start, end);
+                      <div className="flex gap-x-4 mb-6 text-xs lg:text-sm">
+  {Array.from({ length: 3 }).map((_, colIndex) => {
+    const start = colIndex * 5;
+    const end = start + 5;
+    // only take up to 15 songs total
+    const tracks = vinyl.songs.slice(0, 15).slice(start, end);
 
-                            return (
-                              <div key={colIndex} className="grid space-y-2">
-                                {tracks.map((track: string, index: number) => (
-                                  <div key={index} className="flex items-start">
-                                    <span className="text-black font-semibold mr-2">
-                                      {start + index + 1}.
-                                    </span>
-                                    <span className="text-black tracking-tight">{track}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            );
-                        })}
+    return (
+      <div key={colIndex} className="flex-1 space-y-2">
+        {tracks.map((track: string, index: number) => (
+          <div key={index} className="flex items-start">
+            <span className="text-black font-semibold mr-1">
+              {start + index + 1}.
+            </span>
+            <span className="text-black tracking-tight">{track}</span>
+          </div>
+        ))}
+      </div>
+    );
+  })}
+</div>
 
-                      </div>
                       <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
                     </div>
                   </div>
