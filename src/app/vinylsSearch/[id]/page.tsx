@@ -62,12 +62,12 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                         <p className="font-sans text-xl lg:text-xl tracking-tight font-light  text-black uppercase">
                           {vinyl.title}
                         </p>
-                        <p className="-translate-y-2 text-base lg:text-lg font-medium text-gray-700 border-b-2 border-gray-300 ">
+                        <p className="-translate-y-2 text-base lg:text-sm font-medium text-gray-700 border-b-2 border-gray-300 ">
                           {vinyl.artist}
                         </p>
                       
                       </div>
-                      <div className="flex gap-x-4 mb-3 text-[8px] ">
+                      <div className="flex gap-x-0 mb-3 text-[8px] ">
   {Array.from({ length: 3 }).map((_, colIndex) => {
     const start = colIndex * 5;
     const end = start + 5;
