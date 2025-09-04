@@ -66,7 +66,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                           {vinyl.artist}
                         </p>
                       </div>
-                      <div className="flex gap-x-4 mb-6 text-xs lg:text-sm">
+                      <div className="flex gap-x-4 mb-6 text-sm ">
   {Array.from({ length: 3 }).map((_, colIndex) => {
     const start = colIndex * 5;
     const end = start + 5;
@@ -77,10 +77,10 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
       <div key={colIndex} className="flex-1 space-y-2">
         {tracks.map((track: string, index: number) => (
           <div key={index} className="flex items-start">
-            <span className="text-black font-semibold mr-1">
+            <span className="text-black font-normal mr-1">
               {start + index + 1}.
             </span>
-            <span className="text-black tracking-tight">{track}</span>
+            <span className="text-black tracking-tight font-light">{track}</span>
           </div>
         ))}
       </div>
