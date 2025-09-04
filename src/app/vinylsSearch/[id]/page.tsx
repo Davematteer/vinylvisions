@@ -58,15 +58,14 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                           className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
                         />
                       </div>
-                      <div className="mb-3">
+                      <div className="">
                         <p className="font-sans text-xl lg:text-xl tracking-tight font-light  text-black uppercase">
                           {vinyl.title}
                         </p>
-                        <p className="-translate-y-2 text-base lg:text-lg font-medium text-gray-700 ">
+                        <p className="-translate-y-2 text-base lg:text-lg font-medium text-gray-700 border-b-2 border-gray-300 ">
                           {vinyl.artist}
                         </p>
-                        <p className="border-b-2 border-gray-300">
-                        </p>
+                      
                       </div>
                       <div className="flex gap-x-4 mb-3 text-[8px] ">
   {Array.from({ length: 3 }).map((_, colIndex) => {
