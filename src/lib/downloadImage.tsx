@@ -1,8 +1,10 @@
 "use client";
 import * as htmlToImage from "html-to-image";
 import { Download, DownloadIcon } from "lucide-react";
+import { UserSession } from "./authMethods";
 
 export const handleDownload = async (targetId: string) => {
+
   const node = document.getElementById(targetId);
   if (!node) return;
   
@@ -58,7 +60,9 @@ export const handleDownload = async (targetId: string) => {
   }
 };
 
-export function DownloadCardButton({ targetId }: { targetId: string }) {
+export function DownloadCardButton({ targetId}: { targetId: string }) {
+  
+
   return (
    <>
     <button

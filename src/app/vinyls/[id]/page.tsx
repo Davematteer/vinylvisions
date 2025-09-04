@@ -36,7 +36,7 @@ const getCovers = async (): Promise<Cover[]> => {
 };
 
 export default async function Vinyl({ params }: { params: { id: string } }) {
-  const { id } = params;
+  const { id } = await params;
 
   // fetch all covers from JSON
   const covers = await getCovers();
@@ -82,7 +82,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                         />
                       </div>
 
-                      <div className="mb-6">
+                      <div className="mb-3">
                         <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
                           {vinyl.title}
                         </p>
@@ -97,7 +97,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                             <span className="text-black font-semibold mr-2">
                               {index + 1}.
                             </span>
-                            <span className="text-black">{track}</span>
+                            <span className="text-black tracking-tight">{track}</span>
                           </div>
                         ))}
                       </div>

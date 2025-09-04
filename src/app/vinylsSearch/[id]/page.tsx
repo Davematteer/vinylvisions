@@ -47,7 +47,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
               <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
                 <CardContent className="p-8 lg:p-10" id={vinyl.title} >
                   <div id="my-node" className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-2 shadow-xl">
-                    <div className="bg-white p-6">
+                    <div id="printing" className="bg-white p-6">
                       <div className="relative mb-6 flex justify-center" >
                         <Image
                         
@@ -58,21 +58,21 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                           className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
                         />
                       </div>
-                      <div className="mb-6">
-                        <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
+                      <div className="mb-3">
+                        <p className="font-sans text-xl lg:text-3xl tracking-tight font-light  text-black uppercase">
                           {vinyl.title}
                         </p>
                         <p className="text-base lg:text-lg font-medium text-gray-700">
                           {vinyl.artist}
                         </p>
                       </div>
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
+                      <div className="grid grid-cols-2 gap-x-4  mb-6 text-xs lg:text-sm">
                         {vinyl.songs.slice(0, 10).map((track: string, index: number) => (
                           <div key={index} className="flex items-start">
                             <span className="text-black font-semibold mr-2">
                               {index + 1}.
                             </span>
-                            <span className="text-black">{track}</span>
+                            <span className="text-black tracking-tight">{track}</span>
                           </div>
                         ))}
                       </div>
@@ -127,6 +127,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <PayButton amount={vinyl.price * 100} />
           {/* Just for testing the card download */}
           <DownloadCardButton targetId={vinyl.title} />
+          {/*This one is for printing */}
+          
           <HistoryWrapperComponent item={historyitem} />
         </div>
       </section>
