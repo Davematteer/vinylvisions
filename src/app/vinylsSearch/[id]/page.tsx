@@ -74,7 +74,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
     const tracks = vinyl.songs.slice(0, 15).slice(start, end);
 
     return (
-      <div key={colIndex} className="flex-1 space-y-2">
+      <div key={colIndex} className="flex-1 space-y-1">
         {tracks.map((track: string, index: number) => (
           <div key={index} className="flex items-start">
             <span className="text-black font-normal mr-1">
