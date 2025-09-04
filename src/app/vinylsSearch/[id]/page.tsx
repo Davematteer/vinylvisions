@@ -75,14 +75,19 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
 
     return (
       <div key={colIndex} className="flex-1 space-y-1">
-        {tracks.map((track: string, index: number) => (
-          <div key={index} className="flex items-start">
+        {tracks.map((track: string, index: number) => 
+          { 
+            track = track.replace(/\([^)]*\)/g, '');
+            return (
+              <div key={index} className="flex items-start">
             <span className="text-black font-normal mr-1">
               {start + index + 1}.
             </span>
             <span className="text-black tracking-tight font-light">{track}</span>
           </div>
-        ))}
+            )
+          
+        })}
       </div>
     );
   })}
@@ -140,7 +145,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           {/* Just for testing the card download */}
           <DownloadCardButton targetId={vinyl.title} />
           {/*This one is for printing */}
-          {/*<DownloadCardButton targetId="printing" /> */}
+          <DownloadCardButton targetId="printing" />
           <HistoryWrapperComponent item={historyitem} />
         </div>
       </section>
