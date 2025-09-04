@@ -31,6 +31,7 @@ import { HistorySheet } from "./historySheet";
 import { HistoryCarousel } from "./historyCarousel";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CartSheet } from "./CartSheet";
+import { extractColors } from "extract-colors";
 
 
 
@@ -41,7 +42,7 @@ export const Header = () => {
 
   const [isOpen, setOpen] = useState(false);
   const [isOpenSearch, setSearchOpen] = useState(false);
-
+  
 
   return (
     <>

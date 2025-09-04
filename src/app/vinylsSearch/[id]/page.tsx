@@ -13,6 +13,9 @@ import { DownloadCardButton } from "@/lib/downloadImage";
 import { CartItem, HistoryItem, saveHistory } from "@/lib/searchHistory";
 import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
 import { AddtoCartButton } from "@/app/AddtoCartButton";
+import { extractColors } from "extract-colors";
+import  getPixels from "get-pixels";
+import VinylPalette from "@/components/VinylPalette";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
@@ -21,6 +24,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
   });
   const vinyl = await res.json();
   vinyl.price = 100;
+
+
 
   const historyitem:HistoryItem = {
     name:(vinyl.title as string),
@@ -58,6 +63,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                           className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
                         />
                       </div>
+                      <VinylPalette src={vinyl.image} />
+
                       <div className="">
                         <p className="font-sans text-xl lg:text-xl tracking-tight font-light  text-black uppercase">
                           {vinyl.title}
@@ -94,7 +101,8 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
   })}
 </div>
 
-                      <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
+                      {/* <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div> */}
+
                     </div>
                   </div>
                 </CardContent>

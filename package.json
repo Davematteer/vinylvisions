@@ -27,7 +27,9 @@
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "extract-colors": "^4.2.1",
     "genius-lyrics": "^4.4.7",
+    "get-pixels": "^3.3.3",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "json-server": "^1.0.0-beta.3",
@@ -47,6 +49,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/get-pixels": "^3.3.4",
     "@types/node": "^20",
     "@types/pg": "^8.15.5",
     "@types/react": "^19",
