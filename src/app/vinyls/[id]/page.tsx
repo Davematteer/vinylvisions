@@ -16,6 +16,7 @@ import fs from "fs/promises";
 import { CartItem, HistoryItem, saveHistory } from "@/lib/searchHistory";
 import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
 import { AddtoCartButton } from "@/app/AddtoCartButton";
+import VinylPalette from "@/components/VinylPalette";
 
 export interface Cover {
   id: number;
@@ -81,6 +82,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                           className="w-full max-w-[350px] aspect-square object-cover shadow-lg"
                         />
                       </div>
+                      <VinylPalette src={vinyl.image} />
 
                       <div className="mb-3">
                         <p className="text-xl lg:text-3xl tracking-tight font-light font-sans text-black uppercase">
@@ -91,18 +93,33 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-xs lg:text-sm">
-                        {vinyl.songs.slice(0, 10).map((track, index) => (
-                          <div key={index} className="flex items-start">
-                            <span className="text-black font-semibold mr-2">
-                              {index + 1}.
-                            </span>
-                            <span className="text-black tracking-tight">{track}</span>
-                          </div>
-                        ))}
-                      </div>
+                      <div className="flex gap-x-0 mb-3 text-[8px] ">
+  {Array.from({ length: 3 }).map((_, colIndex) => {
+    const start = colIndex * 5;
+    const end = start + 5;
+    // only take up to 15 songs total
+    const tracks = vinyl.songs.slice(0, 15).slice(start, end);
 
-                      <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div>
+    return (
+      <div key={colIndex} className="flex-1 space-y-1">
+        {tracks.map((track: string, index: number) => 
+          { 
+            track = track.replace(/\([^)]*\)/g, '');
+            return (
+              <div key={index} className="flex items-start">
+            <span className="text-black font-normal mr-1">
+              {start + index + 1}.
+            </span>
+            <span className="text-black tracking-tight font-light">{track}</span>
+          </div>
+            )
+          
+        })}
+      </div>
+    );
+  })}
+</div>
+
                     </div>
                   </div>
                 </CardContent>
