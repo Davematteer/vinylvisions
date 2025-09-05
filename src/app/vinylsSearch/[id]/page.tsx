@@ -74,7 +74,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                         </p>
                       
                       </div>
-                      <div className="flex gap-x-0 mb-3 text-[8px] ">
+                      <div className="flex gap-x-0 text-[8px] ">
   {Array.from({ length: 3 }).map((_, colIndex) => {
     const start = colIndex * 5;
     const end = start + 5;
