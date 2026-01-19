@@ -45,23 +45,25 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
 
   if (!vinyl) return <p>Vinyl not found</p>;
 
-  const historyitem:HistoryItem = {
-    name:(vinyl.title as string),
+  const historyitem: HistoryItem = {
+    name: (vinyl.title as string),
     image: (vinyl.image as string),
-    path:(`/vinyls/${id}` as string),
-    artist:(vinyl.artist as string),
-    title:(vinyl.title as string)};
+    path: (`/vinyls/${id}` as string),
+    artist: (vinyl.artist as string),
+    title: (vinyl.title as string)
+  };
 
-    const cartitem:CartItem = {
-      name:(vinyl.title as string),
-      image: (vinyl.image as string),
-      path:(`/vinyls/${id}` as string),
-      artist:(vinyl.artist as string),
-      title:(vinyl.title as string),
-      price:(vinyl.price)};
-  
+  const cartitem: CartItem = {
+    name: (vinyl.title as string),
+    image: (vinyl.image as string),
+    path: (`/vinyls/${id}` as string),
+    artist: (vinyl.artist as string),
+    title: (vinyl.title as string),
+    price: (vinyl.price)
+  };
 
-    // i did this incase it doesnt parse 
+
+  // i did this incase it doesnt parse 
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -84,7 +86,7 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                       </div>
                       <VinylPalette src={vinyl.image} />
 
-                     
+
                       <div className="">
                         <p className="font-sans text-xl lg:text-xl tracking-tight font-light  text-black uppercase">
                           {vinyl.title}
@@ -92,35 +94,34 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
                         <p className="-translate-y-2 text-base lg:text-sm font-medium text-gray-700 border-b-2 border-gray-300 ">
                           {vinyl.artist}
                         </p>
-                      
+
                       </div>
 
                       <div className="flex gap-x-0  text-[8px] ">
-  {Array.from({ length: 3 }).map((_, colIndex) => {
-    const start = colIndex * 5;
-    const end = start + 5;
-    // only take up to 15 songs total
-    const tracks = vinyl.songs.slice(0, 15).slice(start, end);
+                        {Array.from({ length: 3 }).map((_, colIndex) => {
+                          const start = colIndex * 5;
+                          const end = start + 5;
+                          // only take up to 15 songs total
+                          const tracks = vinyl.songs.slice(0, 15).slice(start, end);
 
-    return (
-      <div key={colIndex} className="flex-1 space-y-1">
-        {tracks.map((track: string, index: number) => 
-          { 
-            track = track.replace(/\([^)]*\)/g, '');
-            return (
-              <div key={index} className="flex items-start">
-            <span className="text-black font-normal mr-1">
-              {start + index + 1}.
-            </span>
-            <span className="text-black tracking-tight font-light">{track}</span>
-          </div>
-            )
-          
-        })}
-      </div>
-    );
-  })}
-</div>
+                          return (
+                            <div key={colIndex} className="flex-1 space-y-1">
+                              {tracks.map((track: string, index: number) => {
+                                track = track.replace(/\([^)]*\)/g, '');
+                                return (
+                                  <div key={index} className="flex items-start">
+                                    <span className="text-black font-normal mr-1">
+                                      {start + index + 1}.
+                                    </span>
+                                    <span className="text-black tracking-tight font-light">{track}</span>
+                                  </div>
+                                )
+
+                              })}
+                            </div>
+                          );
+                        })}
+                      </div>
 
                     </div>
                   </div>
@@ -170,9 +171,9 @@ export default async function Vinyl({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          <AddtoCartButton item={cartitem}/>
-          
-          <PayButton amount={vinyl.price * 100} />
+          <AddtoCartButton item={cartitem} />
+
+          <PayButton amount={350} />
           <DownloadCardButton targetId={vinyl.title} />
           <HistoryWrapperComponent item={historyitem} />
         </div>

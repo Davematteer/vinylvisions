@@ -14,7 +14,7 @@ import { CartItem, HistoryItem, saveHistory } from "@/lib/searchHistory";
 import { HistoryWrapperComponent } from "@/app/HistoryWrapperComponent";
 import { AddtoCartButton } from "@/app/AddtoCartButton";
 import { extractColors } from "extract-colors";
-import  getPixels from "get-pixels";
+import getPixels from "get-pixels";
 import VinylPalette from "@/components/VinylPalette";
 
 export default async function Vinyl({ params }: { params: Promise<{ id: number }> }) {
@@ -23,25 +23,27 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
     cache: "no-store", // ensures always fresh
   });
   const vinyl = await res.json();
-  vinyl.price = 100;
+  vinyl.price = 350;
 
 
 
-  const historyitem:HistoryItem = {
-    name:(vinyl.title as string),
+  const historyitem: HistoryItem = {
+    name: (vinyl.title as string),
     image: (vinyl.image as string),
-    path:(`/vinylsSearch/${id}` as string),
-    artist:(vinyl.artist as string),
-    title:(vinyl.title as string)};
+    path: (`/vinylsSearch/${id}` as string),
+    artist: (vinyl.artist as string),
+    title: (vinyl.title as string)
+  };
 
-    const cartitem:CartItem = {
-      name:(vinyl.title as string),
-      image: (vinyl.image as string),
-      path:(`/vinylsSearch/${id}` as string),
-      artist:(vinyl.artist as string),
-      title:(vinyl.title as string),
-      price:(vinyl.price)};
-  
+  const cartitem: CartItem = {
+    name: (vinyl.title as string),
+    image: (vinyl.image as string),
+    path: (`/vinylsSearch/${id}` as string),
+    artist: (vinyl.artist as string),
+    title: (vinyl.title as string),
+    price: (vinyl.price)
+  };
+
   return (
     <main className="min-h-screen flex justify-center items-start py-20">
       <section className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -55,7 +57,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                     <div id="printing" className="bg-white p-6">
                       <div className="relative mb-6 flex justify-center" >
                         <Image
-                        
+
                           src={vinyl.image}
                           alt={vinyl.title}
                           width={400}
@@ -72,34 +74,33 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
                         <p className="-translate-y-2 text-base lg:text-sm font-medium text-gray-700 border-b-2 border-gray-300 ">
                           {vinyl.artist}
                         </p>
-                      
+
                       </div>
                       <div className="flex gap-x-0 text-[8px] ">
-  {Array.from({ length: 3 }).map((_, colIndex) => {
-    const start = colIndex * 5;
-    const end = start + 5;
-    // only take up to 15 songs total
-    const tracks = vinyl.songs.slice(0, 15).slice(start, end);
+                        {Array.from({ length: 3 }).map((_, colIndex) => {
+                          const start = colIndex * 5;
+                          const end = start + 5;
+                          // only take up to 15 songs total
+                          const tracks = vinyl.songs.slice(0, 15).slice(start, end);
 
-    return (
-      <div key={colIndex} className="flex-1 space-y-1">
-        {tracks.map((track: string, index: number) => 
-          { 
-            track = track.replace(/\([^)]*\)/g, '');
-            return (
-              <div key={index} className="flex items-start">
-            <span className="text-black font-normal mr-1">
-              {start + index + 1}.
-            </span>
-            <span className="text-black tracking-tight font-light">{track}</span>
-          </div>
-            )
-          
-        })}
-      </div>
-    );
-  })}
-</div>
+                          return (
+                            <div key={colIndex} className="flex-1 space-y-1">
+                              {tracks.map((track: string, index: number) => {
+                                track = track.replace(/\([^)]*\)/g, '');
+                                return (
+                                  <div key={index} className="flex items-start">
+                                    <span className="text-black font-normal mr-1">
+                                      {start + index + 1}.
+                                    </span>
+                                    <span className="text-black tracking-tight font-light">{track}</span>
+                                  </div>
+                                )
+
+                              })}
+                            </div>
+                          );
+                        })}
+                      </div>
 
                       {/* <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div> */}
 
@@ -115,7 +116,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-        
+
         {/* RIGHT: Payment / Details */}
         <div className="flex flex-col justify-start gap-6 p-10">
           <p className="text-6xl font-light">{vinyl.title}</p>
@@ -123,7 +124,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
           <p className="text-2xl font-light text-gray-900">
             GHc{vinyl.price.toFixed(2)}
           </p>
-          
+
           {/* Size */}
           <div>
             <label className="block text-sm font-medium mb-1">Size</label>
@@ -133,7 +134,7 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
               <option>A2 - Print Only (Unframed)</option>
             </select>
           </div>
-          
+
           {/* Quantity */}
           <div>
             <label className="block text-sm font-medium mb-1">Quantity</label>
@@ -147,9 +148,9 @@ export default async function Vinyl({ params }: { params: Promise<{ id: number }
               <button className="px-3 py-1 border-l">+</button>
             </div>
           </div>
-          
-         <AddtoCartButton item={cartitem}/>
-          
+
+          <AddtoCartButton item={cartitem} />
+
           <PayButton amount={vinyl.price * 100} />
           {/* Just for testing the card download */}
           <DownloadCardButton targetId={vinyl.title} />
