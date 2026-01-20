@@ -2,12 +2,14 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Canvas, FabricImage, FabricText, Image, Rect } from "fabric";
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { Upload } from "lucide-react";
 
 export default function CustomPrint() {
   const fabricRef = useRef<Canvas | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [isDesignActive, setDesignActive] = useState(true);
+  const [isPaymentActive, setPaymentActive] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -61,6 +63,24 @@ export default function CustomPrint() {
       fabricRef.current = null;
     };
   }, []);
+  
+  const addImage = () =>{
+      if (!fabricRef.current) return;
+
+       FabricImage.fromURL('/covers/babyJhus.jpg').then((img) => {
+        // Scale the image to fit nicely
+        img.scaleToWidth(200);
+        img.set({
+          left: 100,
+          top: 100
+        });
+
+        fabricRef.current!.add(img);
+        fabricRef.current!.renderAll();
+      }).catch((err) => {
+        console.error('Failed to load image:', err);
+      });
+  }
 
   return (
     <main className="min-h-screen flex justify-center items-start py-20 px-4">
@@ -93,48 +113,103 @@ export default function CustomPrint() {
                 </CardContent>
               </Card>
 
-        {/* RIGHT: Product Details & Options */}
-        <div className="flex flex-col justify-start gap-6">
-          {/* Size Selection */}
-          <div className="flex flex-col justify-start gap-6 p-10">
-          <p className="text-6xl font-light">Custom</p>
-          <p className="text-xl font-light text-gray-800">Uploader</p>
-          <p className="text-2xl font-light text-gray-900">
-            GHc 350
-          </p>
+        {/* RIGHT: Controls Column */}
+<div className="flex flex-col gap-8">
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Size</label>
-            <select className="w-full border rounded p-2">
-              <option>A4 - Print Only (Unframed)</option>
-              <option>A3 - Print Only (Unframed)</option>
-              <option>A2 - Print Only (Unframed)</option>
-            </select>
-          </div>
+{/* Tabs */}
+<div className="flex gap-4 border-b pb-2">
+  <button
+    onClick={() => {
+      setDesignActive(true);
+      setPaymentActive(false);
+    }}
+    className={`px-4 py-2 font-medium ${
+      isDesignActive ? "border-b-2 border-black" : "text-gray-400"
+    }`}
+  >
+    Design
+  </button>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Quantity</label>
-            <div className="flex items-center border rounded w-32">
-              <button className="px-3 py-1 border-r">-</button>
-              <input
-                type="number"
-                defaultValue={1}
-                className="w-full text-center outline-none"
-              />
-              <button className="px-3 py-1 border-l">+</button>
-            </div>
-          </div>
+  <button
+    onClick={() => {
+      setPaymentActive(true);
+      setDesignActive(false);
+    }}
+    className={`px-4 py-2 font-medium ${
+      isPaymentActive ? "border-b-2 border-black" : "text-gray-400"
+    }`}
+  >
+    Payment
+  </button>
 </div>
-          {/* Action Buttons Placeholder */}
-          <div className="flex flex-col gap-3 mt-4">
-            <button className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
-              Add to Cart
-            </button>
-            <button className="w-full border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-              Download Preview
-            </button>
-          </div>
+
+{/* DESIGN SECTION */}
+{isDesignActive && (
+  <div className="flex flex-col gap-6 p-6 border rounded-xl">
+    <h2 className="text-xl font-semibold">Design Tools</h2>
+
+    <button
+      onClick={addImage}
+      className="flex items-center gap-2 px-4 py-3 bg-black text-white rounded-lg"
+    >
+      <Upload size={18} />
+      Add Image
+    </button>
+
+    <button className="px-4 py-3 border rounded-lg">
+      Add Text
+    </button>
+
+    <button className="px-4 py-3 border rounded-lg">
+      Add Shape
+    </button>
+  </div>
+)}
+
+{/* PAYMENT SECTION */}
+{isPaymentActive && (
+  <div className="flex flex-col justify-start gap-6">
+    {/* (UNCHANGED PAYMENT JSX — pasted exactly as you had it) */}
+    <div className="flex flex-col justify-start gap-6 p-10">
+      <p className="text-6xl font-light">Custom</p>
+      <p className="text-xl font-light text-gray-800">Uploader</p>
+      <p className="text-2xl font-light text-gray-900">GHc 350</p>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Size</label>
+        <select className="w-full border rounded p-2">
+          <option>A4 - Print Only (Unframed)</option>
+          <option>A3 - Print Only (Unframed)</option>
+          <option>A2 - Print Only (Unframed)</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Quantity</label>
+        <div className="flex items-center border rounded w-32">
+          <button className="px-3 py-1 border-r">-</button>
+          <input
+            type="number"
+            defaultValue={1}
+            className="w-full text-center outline-none"
+          />
+          <button className="px-3 py-1 border-l">+</button>
         </div>
+      </div>
+    </div>
+
+    <div className="flex flex-col gap-3 mt-4">
+      <button className="w-full bg-black text-white py-3 rounded-lg font-medium">
+        Add to Cart
+      </button>
+      <button className="w-full border py-3 rounded-lg font-medium">
+        Download Preview
+      </button>
+    </div>
+  </div>
+)}
+</div>
+
       </section>
     </main>
   );
