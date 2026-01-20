@@ -1,8 +1,9 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Canvas, FabricText, Rect } from "fabric";
+import { Canvas, FabricImage, FabricText, Image, Rect } from "fabric";
 import { useEffect, useRef } from "react";
+
 
 export default function CustomPrint() {
   const fabricRef = useRef<Canvas | null>(null);
@@ -15,6 +16,7 @@ export default function CustomPrint() {
     const canvas = new Canvas(canvasRef.current);
     fabricRef.current = canvas;
 
+    FabricText.ownDefaults.fontFamily = 'Mono'
     // create text
     const helloWorld = new FabricText("Slow Down Its not ready");
     canvas.add(helloWorld);
@@ -35,6 +37,24 @@ export default function CustomPrint() {
     const World = new FabricText("Second text included");
     canvas.add(World);
     canvas.centerObject(World)
+    
+       // Load image asynchronously
+       FabricImage.fromURL('/covers/babyJhus.jpg').then((img) => {
+        // Scale the image to fit nicely
+        img.scaleToWidth(200);
+        img.set({
+          left: 100,
+          top: 100
+        });
+        canvas.add(img);
+        canvas.renderAll();
+      }).catch((err) => {
+        console.error('Failed to load image:', err);
+      });
+    
+    //FabricImage.fromURL('/covers/babyJhus.jpg');
+          
+      
     // cleanup
     return () => {
       canvas.dispose();
