@@ -43,15 +43,18 @@ export default function CustomPrint() {
     <main className="min-h-screen flex justify-center items-start py-20 px-4">
       <section className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
         {/* LEFT: Print Preview (16:20 aspect ratio) */}
+
+              <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
+                <CardContent className="p-8 lg:p-10">
         <div className="flex justify-center items-start">
-          <div id="my-node" className="bg-gradient-to-br  w-110 from-gray-800 via-gray-900 to-black p-1.5">
-            <div id="printing" className="bg-white p-8 h-140">
+          <div id="my-node" className="bg-gradient-to-br  h-130 md:h-144.5 w-80 md:w-110 from-gray-800 via-gray-900 to-black p-2">
+            <div id="printing" className="bg-white p-8 h-125.5 md:h-140">
               <div className="relative mb-67.5 flex justify-center">
                 {/* 16:20 aspect ratio canvas */}
                 <canvas 
                   ref={canvasRef} 
                   className="w-full max-w-[400px] " 
-                  width={800}
+                  width={790}
                   height={500}
                   style={{ aspectRatio: '16/20' } 
                 }
@@ -62,6 +65,10 @@ export default function CustomPrint() {
             </div>
           </div>
         </div>
+
+                      {/* <div className="h-1 bg-gradient-to-r from-yellow-400 via-green-400 via-blue-400 to-purple-400 rounded-full"></div> */}
+                </CardContent>
+              </Card>
 
         {/* RIGHT: Product Details & Options */}
         <div className="flex flex-col justify-start gap-6">
