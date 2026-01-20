@@ -32,6 +32,9 @@ export default function CustomPrint() {
         fabricRef.current!.add(rect);
       };
       addRectangle()
+    const World = new FabricText("Second text included");
+    canvas.add(World);
+    canvas.centerObject(World)
     // cleanup
     return () => {
       canvas.dispose();

@@ -111,9 +111,13 @@ export const Hero = () => {
                   className="transition-transform duration-500 hover:-translate-y-2 hover:shadow-xl rounded-2xl p-6 shadow-md hover:scale-105 hover:shadow-2xl"
                 />
               </CarouselItem>
+                {
+                  /*
               <CarouselItem className="md:translate-y-0 -translate-y-10">
                 <LyricsCard artist="Rema" song="FYN" image="/covers/FYN.png" />
               </CarouselItem>
+                  */
+                }
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
