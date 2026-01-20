@@ -69,7 +69,7 @@ export default function CustomPrint() {
           <p className="text-6xl font-light">Custom</p>
           <p className="text-xl font-light text-gray-800">Uploader</p>
           <p className="text-2xl font-light text-gray-900">
-            GHc 100
+            GHc 350
           </p>
 
           <div>

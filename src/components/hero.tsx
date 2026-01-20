@@ -31,6 +31,7 @@ import { LyricsCard } from "./lyricsCard";
 import { useState } from "react";
 import { OpenSearch } from "@/app/utilities/search";
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
 
 export const Hero = () => {
 
@@ -56,9 +57,20 @@ export const Hero = () => {
             </p>
           </div>
           <div className="mt-5">
+            {
+
+              /*
             <Button size="lg" className="gap-4" onClick={()=>setSearchOpen(true)}>
               Browse Here <MoveRight className="w-4 h-4" />
             </Button>
+              */
+            }
+              
+            <Link href="/customUpload" className="gap-4">
+            <Button size="lg" className="gap-4">
+              Custom Design<MoveRight className="w-4 h-4" />
+            </Button>
+            </Link>
           </div>
         </div>
   
