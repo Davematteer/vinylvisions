@@ -28,6 +28,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "extract-colors": "^4.2.1",
+    "fabric": "^7.1.0",
     "genius-lyrics": "^4.4.7",
     "get-pixels": "^3.3.3",
     "html-to-image": "^1.11.13",
