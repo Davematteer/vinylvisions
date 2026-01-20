@@ -16,7 +16,7 @@ export default function CustomPrint() {
     fabricRef.current = canvas;
 
     // create text
-    const helloWorld = new FabricText("hello world");
+    const helloWorld = new FabricText("Slow Down Its not ready");
     canvas.add(helloWorld);
 
     const addRectangle = () => {
