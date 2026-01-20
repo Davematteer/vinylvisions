@@ -18,6 +18,7 @@ export default function CustomPrint() {
     // create text
     const helloWorld = new FabricText("Slow Down Its not ready");
     canvas.add(helloWorld);
+    canvas.centerObject(helloWorld)
 
     const addRectangle = () => {
         const rect = new Rect({
