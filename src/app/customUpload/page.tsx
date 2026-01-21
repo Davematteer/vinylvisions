@@ -15,7 +15,9 @@ export default function CustomPrint() {
     if (!canvasRef.current) return;
 
     // create fabric canvas
-    const canvas = new Canvas(canvasRef.current);
+    const canvas = new Canvas(canvasRef.current,{
+      backgroundColor: "#ffffff",
+    });
     fabricRef.current = canvas;
 
     FabricText.ownDefaults.fontFamily = 'Mono'
