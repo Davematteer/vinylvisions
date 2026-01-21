@@ -120,7 +120,7 @@ canvas.set({
             <div className="relative scale-71 scale-y-80 md:scale-100 w-full max-w-[308px] md:max-w-[430px] aspect-[16/20]  md:p-0">
   <canvas
     ref={canvasRef}
-    className="w-full h-full   -translate-x-23.5 -translate-y-23 md:-translate-y-8 md:-translate-x-8"
+    className="w-full h-full   -translate-x-23.5 -translate-y-22 md:-translate-y-8 md:-translate-x-8"
     width={425}
     height={560}
   />
