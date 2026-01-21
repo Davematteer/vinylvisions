@@ -117,10 +117,10 @@ canvas.set({
         <div className="flex justify-center items-start">
           <div id="my-node" className="bg-gradient-to-br  h-117 md:h-144.5 w-79.5 md:w-110 from-gray-800 via-gray-900 to-black p-2">
             <div id="printing" className="bg-white p-8 h-111 md:h-140">
-            <div className="relative scale-72 scale-y-80 md:scale-100 w-full max-w-[308px] md:max-w-[430px] aspect-[16/20]  md:p-0">
+            <div className="relative scale-71 scale-y-80 md:scale-100 w-full max-w-[308px] md:max-w-[430px] aspect-[16/20]  md:p-0">
   <canvas
     ref={canvasRef}
-    className="w-full h-full   -translate-x-23.5 -translate-y-28 md:-translate-y-8 md:-translate-x-8"
+    className="w-full h-full   -translate-x-23.5 -translate-y-26 md:-translate-y-8 md:-translate-x-8"
     width={425}
     height={560}
   />
