@@ -178,24 +178,6 @@ export function SettingsPanel({canvas}:{canvas:Canvas|null}){
     "
   >      <Circle size={18} />
     </button>
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
 </div>
   </div>
         </>
