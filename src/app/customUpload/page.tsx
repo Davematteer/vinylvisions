@@ -108,13 +108,13 @@ export default function CustomPrint() {
               <Card className="bg-gradient-to-br from-[#fbf9f7] to-[#f3f0ee] overflow-hidden shadow-lg">
                 <CardContent className="p-8 lg:p-10">
         <div className="flex justify-center items-start">
-          <div id="my-node" className="bg-gradient-to-br  h-130 md:h-144.5 w-80 md:w-110 from-gray-800 via-gray-900 to-black p-2">
-            <div id="printing" className="bg-white p-8 h-125.5 md:h-140">
+          <div id="my-node" className="bg-gradient-to-br  h-115 md:h-144.5 w-80 md:w-110 from-gray-800 via-gray-900 to-black p-2">
+            <div id="printing" className="bg-white p-8 h-110 md:h-140">
             <div className="relative w-full max-w-[308px] md:max-w-[430px] aspect-[16/20]">
   <canvas
     ref={canvasRef}
-    className="w-full h-full  -translate-x-15 -translate-y-10 md:-translate-y-8 md:-translate-x-8"
-    width={428}
+    className="w-full h-full p-15  md:p-0  -translate-x-23.5 -translate-y-23 md:-translate-y-8 md:-translate-x-8"
+    width={425}
     height={560}
   />
 </div>
