@@ -20,39 +20,9 @@ export default function CustomPrint() {
 
     FabricText.ownDefaults.fontFamily = 'Mono'
     // create text
-    const helloWorld = new FabricText("Slow Down Its not ready");
-    canvas.add(helloWorld);
-    canvas.centerObject(helloWorld)
 
-    const addRectangle = () => {
-        const rect = new Rect({
-          top: 50,
-          left: 50,
-          width: 50,
-          height: 50,
-          fill: "red"
-        });
-  
-        fabricRef.current!.add(rect);
-      };
-      addRectangle()
-    const World = new FabricText("Second text included");
-    canvas.add(World);
-    canvas.centerObject(World)
+      
     
-       // Load image asynchronously
-       FabricImage.fromURL('/covers/babyJhus.jpg').then((img) => {
-        // Scale the image to fit nicely
-        img.scaleToWidth(200);
-        img.set({
-          left: 100,
-          top: 100
-        });
-        canvas.add(img);
-        canvas.renderAll();
-      }).catch((err) => {
-        console.error('Failed to load image:', err);
-      });
     
     //FabricImage.fromURL('/covers/babyJhus.jpg');
           
@@ -64,10 +34,12 @@ export default function CustomPrint() {
     };
   }, []);
   
+
+  // Image editting functions 
   const addImage = () =>{
       if (!fabricRef.current) return;
 
-       FabricImage.fromURL('/covers/babyJhus.jpg').then((img) => {
+       FabricImage.fromURL('/covers/FYN.png').then((img) => {
         // Scale the image to fit nicely
         img.scaleToWidth(200);
         img.set({
@@ -82,6 +54,50 @@ export default function CustomPrint() {
       });
   }
 
+  const addText = () =>{
+    const World = new FabricText("Second text included");
+    fabricRef.current!.add(World);
+    fabricRef.current!.centerObject(World)
+
+  }
+
+    const addRectangle = () => {
+        const rect = new Rect({
+          top: 50,
+          left: 50,
+          width: 50,
+          height: 50,
+          fill: "red"
+        });
+  
+        fabricRef.current!.add(rect);
+      };
+
+
+//-------------------------------------------------------------
+
+//Download function
+  const downloadCanvas = () => {
+    if (!fabricRef.current) return;
+  
+    const canvas = fabricRef.current;
+  
+    // Export canvas as PNG
+    const dataURL = canvas.toDataURL({
+      format: "png",
+      quality: 1,
+      multiplier: 5, // ↑ increases resolution (retina / print preview)
+    });
+  
+    // Create a temporary download link
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "custom-print.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
   return (
     <main className="min-h-screen flex justify-center items-start py-20 px-4">
       <section className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
@@ -92,19 +108,15 @@ export default function CustomPrint() {
         <div className="flex justify-center items-start">
           <div id="my-node" className="bg-gradient-to-br  h-130 md:h-144.5 w-80 md:w-110 from-gray-800 via-gray-900 to-black p-2">
             <div id="printing" className="bg-white p-8 h-125.5 md:h-140">
-              <div className="relative mb-67.5 flex justify-center">
-                {/* 16:20 aspect ratio canvas */}
-                <canvas 
-                  ref={canvasRef} 
-                  className="w-full max-w-[400px] " 
-                  width={790}
-                  height={500}
-                  style={{ aspectRatio: '16/20' } 
-                }
-                />
-              </div>
-              <div>
-              </div>
+            <div className="relative w-full max-w-[308px] md:max-w-[430px] aspect-[16/20]">
+  <canvas
+    ref={canvasRef}
+    className="w-full h-full  md:-translate-y-8 md:-translate-x-8"
+    width={428}
+    height={560}
+  />
+</div>
+              
             </div>
           </div>
         </div>
@@ -156,11 +168,11 @@ export default function CustomPrint() {
       Add Image
     </button>
 
-    <button className="px-4 py-3 border rounded-lg">
+    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
       Add Text
     </button>
 
-    <button className="px-4 py-3 border rounded-lg">
+    <button className="px-4 py-3 border rounded-lg" onClick={addRectangle}>
       Add Shape
     </button>
   </div>
@@ -202,9 +214,13 @@ export default function CustomPrint() {
       <button className="w-full bg-black text-white py-3 rounded-lg font-medium">
         Add to Cart
       </button>
-      <button className="w-full border py-3 rounded-lg font-medium">
-        Download Preview
-      </button>
+      <button
+  onClick={downloadCanvas}
+  className="w-full border py-3 rounded-lg font-medium"
+>
+  Download Preview
+</button>
+
     </div>
   </div>
 )}
