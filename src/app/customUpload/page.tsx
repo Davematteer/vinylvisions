@@ -111,7 +111,7 @@ export default function CustomPrint() {
             <div className="relative w-full max-w-[308px] md:max-w-[430px] aspect-[16/20]">
   <canvas
     ref={canvasRef}
-    className="w-full h-full  md:-translate-y-8 md:-translate-x-8"
+    className="w-full h-full  -translate-x-15 -translate-y-10 md:-translate-y-8 md:-translate-x-8"
     width={428}
     height={560}
   />
@@ -159,6 +159,9 @@ export default function CustomPrint() {
 {isDesignActive && (
   <div className="flex flex-col gap-6 p-6 border rounded-xl">
     <h2 className="text-xl font-semibold">Design Tools</h2>
+    <p className="text-sm text-gray-500 leading-snug">
+  For best results, create and edit designs on a laptop or desktop computer.
+</p>
 
     <button
       onClick={addImage}
