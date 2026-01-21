@@ -4,9 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Canvas, FabricImage, FabricText, Image, Rect } from "fabric";
 import { useEffect, useRef, useState } from "react";
 import { Upload } from "lucide-react";
+import { SettingsPanel } from "@/components/SettingsPanel";
 
 export default function CustomPrint() {
-  const fabricRef = useRef<Canvas | null>(null);
+  //const fabricRef = useRef<Canvas | null>(null);
+  const [canvasTest, setCanvasTest] = useState<Canvas|null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDesignActive, setDesignActive] = useState(true);
   const [isPaymentActive, setPaymentActive] = useState(false);
@@ -18,14 +20,15 @@ export default function CustomPrint() {
     const canvas = new Canvas(canvasRef.current,{
       backgroundColor: "#ffffff",
     });
-    fabricRef.current = canvas;
-
+    //fabricRef.current = canvas;
+    //fabricRef.current.renderAll();
     canvas.selection = true;
 canvas.preserveObjectStacking = true;
 canvas.set({
   allowTouchScrolling: false,
 });
 
+    canvas.renderAll()
 
     FabricText.ownDefaults.fontFamily = 'Mono'
     // create text
@@ -34,65 +37,26 @@ canvas.set({
     
     
     //FabricImage.fromURL('/covers/babyJhus.jpg');
-          
-      
+    setCanvasTest(canvas)
+    
     // cleanup
     return () => {
       canvas.dispose();
-      fabricRef.current = null;
+      //fabricRef.current = null;
+      setCanvasTest(null);
     };
   }, []);
   
 
-  // Image editting functions 
-  const addImage = () =>{
-      if (!fabricRef.current) return;
-
-       FabricImage.fromURL('/covers/FYN.png').then((img) => {
-        // Scale the image to fit nicely
-        img.scaleToWidth(200);
-        img.set({
-          left: 100,
-          top: 100
-        });
-
-        fabricRef.current!.add(img);
-        fabricRef.current!.renderAll();
-      }).catch((err) => {
-        console.error('Failed to load image:', err);
-      });
-  }
-
-  const addText = () =>{
-    const World = new FabricText("Second text included");
-    fabricRef.current!.add(World);
-    fabricRef.current!.centerObject(World)
-
-  }
-
-    const addRectangle = () => {
-        const rect = new Rect({
-          top: 50,
-          left: 50,
-          width: 50,
-          height: 50,
-          fill: "red"
-        });
-  
-        fabricRef.current!.add(rect);
-      };
-
-
-//-------------------------------------------------------------
-
 //Download function
   const downloadCanvas = () => {
-    if (!fabricRef.current) return;
+    //if (!fabricRef.current) return;
+    //const canvas = fabricRef.current;
+    if (!canvasTest) return;
   
-    const canvas = fabricRef.current;
   
     // Export canvas as PNG
-    const dataURL = canvas.toDataURL({
+    const dataURL = canvasTest.toDataURL({
       format: "png",
       quality: 1,
       multiplier: 5, // ↑ increases resolution (retina / print preview)
@@ -166,28 +130,7 @@ canvas.set({
 
 {/* DESIGN SECTION */}
 {isDesignActive && (
-  <div className="flex flex-col gap-6 p-6 border rounded-xl">
-    <h2 className="text-xl font-semibold">Design Tools</h2>
-    <p className="text-sm text-gray-500 leading-snug">
-  For best results, create and edit designs on a laptop or desktop computer.
-</p>
-
-    <button
-      onClick={addImage}
-      className="flex items-center gap-2 px-4 py-3 bg-black text-white rounded-lg"
-    >
-      <Upload size={18} />
-      Add Image
-    </button>
-
-    <button className="px-4 py-3 border rounded-lg" onClick={addText}>
-      Add Text
-    </button>
-
-    <button className="px-4 py-3 border rounded-lg" onClick={addRectangle}>
-      Add Shape
-    </button>
-  </div>
+  <SettingsPanel canvas={canvasTest} />
 )}
 
 {/* PAYMENT SECTION */}
