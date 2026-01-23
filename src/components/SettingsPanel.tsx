@@ -72,7 +72,7 @@ export function SettingsPanel({canvas}:{canvas:Canvas|null}){
   const addImage = () =>{
       if (!canvas) return;
 
-       FabricImage.fromURL('/covers/testImage2.jpg').then((img) => {
+       FabricImage.fromURL('/covers/ValsDayPromo.png').then((img) => {
         // Scale the image to fit nicely
         img.scaleToWidth(200);
         img.set({
